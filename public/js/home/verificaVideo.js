@@ -23,7 +23,6 @@ function verifica() {
         video = {
             video: ehVideo
         }
-
         $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
         $.post('/api/addVideo', video, function(data) {
 

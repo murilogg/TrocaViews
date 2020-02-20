@@ -42,14 +42,14 @@ class HomeController extends Controller
 
         $codVideo = $request->input('video');
 
-        $userId = Auth::id();
-        $videos = Video::where('user_id', $userId)->get();
+        //$userId = Auth::id();
+        //$videos = Video::where('user_id', $userId)->get();
 
-        foreach($videos as $v){
-            if($v->codigoVideo == $codVideo){
+        $temVideos = Video::where('codigoVideo', $codVideo)->get();
 
-                return 0;
-            }
+        if(count($temVideos) > 0){
+
+            return 0;
         }
 
         $novo = new Video();
@@ -59,17 +59,14 @@ class HomeController extends Controller
         $novo->user_id = Auth()->id();
         $novo->save();
 
-        return $videos; 
+        return 1; 
     }
 
     public function obter(){
-        $todos = Video::all();
-
-        return json_encode($todos);
+        $userId = Auth::id();
+        $videos = Video::where('user_id', '<>', $userId)->get();
+        
+        return json_encode($videos);
     }
 
-    public function lista(){
-        $todos = Video;
-
-    }
 }
