@@ -26,8 +26,7 @@ function verifica() {
         $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
         $.post('/api/addVideo', video, function(data) {
 
-            if (data != 0) {
-                console.log("retorno : ", data)
+            if (data == 1) {
                 $('#adicionarVideoModal').modal('hide')
                 $('#canal').val('');
                 Swal.fire({
@@ -38,7 +37,7 @@ function verifica() {
                     showConfirmButton: false,
                     timer: 1800
                 })
-            } else {
+            } else if (data == 0) {
                 $('#canal').val('');
                 Swal.fire({
                     icon: 'warning',
@@ -47,7 +46,16 @@ function verifica() {
                     footer: '<p>O sistema não aceita videos iguais</p>'
                 })
 
+            } else {
+                $('#canal').val('');
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Atenção !',
+                    text: 'Só é permitido adicionar 2 videos !',
+                    footer: '<a href>Assine premium, e adicione mais Videos</a>'
+                })
             }
+            console.log(data)
         })
     }
 }

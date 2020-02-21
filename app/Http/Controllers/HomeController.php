@@ -11,25 +11,21 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
+        $id = Auth()->id();
         $user = User::find(Auth()->id());
-        return view('home', compact('user'));
+        $dados = Video::select('videos.id', 'videos.user_id')
+                            ->join('users', 'users.id', '=', 'videos.user_id')
+                            ->orWhere('ativo', '<>', 0)
+                            ->where('user_id', '=', $id)->get();
+
+        return view('home', compact('user'), ['dados'=>$dados]);
     }
 
     public function logado(){
@@ -40,23 +36,40 @@ class HomeController extends Controller
 
     public function addVideo(Request $request){
 
+        
+        $id = Auth::id();
         $codVideo = $request->input('video');
+        $temVideoIgual = Video::where('codigoVideo', $codVideo)->get();
+        $firstVideo = DB::table('videos')->where('user_id', '=', $id)->get();
+        $videoAtivo = Video::select('videos.id')
+                            ->join('users', 'users.id', '=', 'videos.user_id')
+                            ->orWhere('ativo', '<>', 0)
+                            ->where('user_id', '=', $id)->get();
 
-        //$userId = Auth::id();
-        //$videos = Video::where('user_id', $userId)->get();
-
-        $temVideos = Video::where('codigoVideo', $codVideo)->get();
-
-        if(count($temVideos) > 0){
+        if(count($temVideoIgual) > 0){
 
             return 0;
         }
 
+        if(count($videoAtivo) == 2){
+           
+            return 2;
+        }
+
+        if(count($firstVideo) == 0){
+            $user = User::find(Auth()->id());
+            $user->limit = 2;
+            $user->updated_at = new DateTime();
+            $user->save();
+        }
+
         $novo = new Video();
         $novo->codigoVideo = $codVideo;
+        $novo->vistoPorVideo = 0;
+        $novo->ativo = true;
         $novo->created_at = new DateTime();
         $novo->updated_at = new DateTime();
-        $novo->user_id = Auth()->id();
+        $novo->user_id = Auth::id();
         $novo->save();
 
         return 1; 

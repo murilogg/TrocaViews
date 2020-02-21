@@ -20,11 +20,16 @@ function sidebarActive() {
 function userLogado() {
     var logado = $('#userId').text();
     if (logado != 0) {
-        $('#userLogado').modal('show');
-
-        setTimeout(function() {
-            $('#userLogado').modal('hide');
-        }, 3000); // 3000 = 3 segundos
+        Swal.fire({
+                title: 'Seja Bem-Vindo! ',
+                text: 'Você está logado!',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 2500
+            })
+            // setTimeout(function() {
+            //     $('#userLogado').modal('hide');
+            // }, 3000); // 3000 = 3 segundos
     }
 }
 
@@ -32,28 +37,46 @@ function userLogado() {
 //var myVideo = document.querySelector("#video")
 
 function mostraVideo() {
+    var media = 0
+    var tag = "http://www.youtube.com/embed/"
+
     $.get('/api/obter', function(data) {
         let t = JSON.parse(data);
+        let m = JSON.parse(data);
         for (var i = 0; i <= t.length; i++) {
-
+            media += window.matchMedia(t[i].vistoPorVideo)
+            console.log("media for", media)
         }
-        var tag = "http://www.youtube.com/embed/" + t[0].codigoVideo
-        document.getElementById("player").src = tag
+        console.log("media depois do for", media)
+
+        for (var x = 0; x <= m.length; x++) {
+
+            if (m[x].vistoPorVideo == 0) {
+
+                tag + m[x].codigoVideo
+                document.getElementById("player").src = tag
+            } else if (m[x].vistoPorVideo < media) {
+
+                tag + m[x].codigoVideo
+                document.getElementById("player").src = tag
+                media += m[x].vistoPorVideo
+            }
+        }
+
+
         console.log("json.parse: ", t)
     })
 }
 
 
-var videoId = document.getElementsByTagName('src');
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+//var videoId = document.getElementsByTagName('src');
+//firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 // var player;
 
-// function onYouTubeIframeAPIReady() {
+// function onYouTubeIframeAPIReady(objeto) {
 //     player = new YT.Player('player', {
-//         height: '400',
-//         width: '700',
-//         videoId: '2mM3xjxzns4',
+//         videoId: objeto,
 //         events: {
 //             'onReady': onPlayerReady,
 //             'onStateChange': onPlayerStateChange
@@ -63,17 +86,4 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 // function onPlayerReady(event) {
 //     event.target.playVideo();
-// }
-
-// var done = false;
-
-// function onPlayerStateChange(event) {
-//     if (event.data == YT.PlayerState.PLAYING && !done) {
-//         setTimeout(stopVideo, 6000);
-//         done = true;
-//     }
-// }
-
-// function stopVideo() {
-//     player.stopVideo();
 // }

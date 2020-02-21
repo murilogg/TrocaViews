@@ -21,7 +21,7 @@
     <link href="{{ asset('css/home/home.css') }}" rel="stylesheet">
 @endpush
 
-<div style="display: none;" id="userId">{{ $user->id }}</div> 
+{{-- <div style="display: none;" id="userId">{{ $user->id }}</div>  --}}
 <div class="container">
     <div class="row profile">
         <div class="col-md-3">
@@ -50,7 +50,7 @@
                 <!-- SIDEBAR BUTTONS -->
                 <div class="profile-userbuttons">
                     <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#adicionarVideoModal">Adicionar</button>
-                    <button type="button" class="btn btn-danger btn-sm">Remover</button>
+                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#removerVideoModal">Remover</button>
                 </div>
                 <!-- END SIDEBAR BUTTONS -->
                 <!-- SIDEBAR MENU -->
@@ -101,7 +101,7 @@
     <div class="modal-dialog modal-lg">
         <div class="col-md-12">
             <div class="card border-primary">
-                <div class="card-header title m-b-md">{{ strtoupper($user->name) }} - Você está logado!</div>
+                {{-- <div class="card-header title m-b-md">{{ strtoupper($user->name) }} - Você está logado!</div> --}}
 
                 <div class="card-body">
                     @if (!session('status'))
@@ -116,7 +116,7 @@
 </div>
   
 {{-- Modal adicionar video --}}
-<div class="modal fade" id="adicionarVideoModal" tabindex="-1" role="dialog" aria-labelledby="adicionarVideoModalLabel" aria-hidden="true">
+<div class="modal fade" id="adicionarVideoModal" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -133,6 +133,40 @@
                         <input id="canal" type="text" class="form-control" name="canal" required placeholder="Adicione seu Video">
                     </div>
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" onclick="verifica()">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- Modal remover video --}}
+<div class="modal fade" id="removerVideoModal" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Adicionar Video</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-ordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Videos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+    @foreach ($dados as $item)
+                        <tr>
+                            <td>{{ $item->id }}</td>
+                        </tr>
+    @endforeach
+                    </tbody>
+                </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
