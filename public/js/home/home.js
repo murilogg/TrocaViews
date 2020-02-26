@@ -2,6 +2,7 @@ window.onload = function() {
     sidebarActive()
     userLogado()
     mostraVideo()
+    $('[data-toggle="tooltip"]').tooltip()
 }
 
 function sidebarActive() {
@@ -39,51 +40,39 @@ function userLogado() {
 function mostraVideo() {
     var media = 0
     var tag = "http://www.youtube.com/embed/"
+    var codigo = 0
 
     $.get('/api/obter', function(data) {
         let t = JSON.parse(data);
         let m = JSON.parse(data);
-        for (var i = 0; i <= t.length; i++) {
-            media += window.matchMedia(t[i].vistoPorVideo)
-            console.log("media for", media)
+
+        // var data = new Date();
+        // var min = data.getMinutes(); 
+
+        for (var i = 0; i < t.length; i++) {
+
+            if (t[i].vistoVideo > 0) {
+                media += window.matchMedia(t[i].vistoVideo)
+                console.log("media for", media)
+            }
         }
         console.log("media depois do for", media)
 
-        for (var x = 0; x <= m.length; x++) {
 
-            if (m[x].vistoPorVideo == 0) {
+        for (var x = 0; x < m.length; x++) {
 
-                tag + m[x].codigoVideo
-                document.getElementById("player").src = tag
-            } else if (m[x].vistoPorVideo < media) {
+            if (m[x].vistoVideo == 0) {
 
-                tag + m[x].codigoVideo
-                document.getElementById("player").src = tag
-                media += m[x].vistoPorVideo
+                codigo = m[x].codigoVideo
+                document.getElementById("player").src = tag + codigo
+            } else if (m[x].vistoVideo < media) {
+
+                codigo = m[x].codigoVideo
+                document.getElementById("player").src = tag + codigo
+                media += m[x].vistoVideo
             }
         }
-
 
         console.log("json.parse: ", t)
     })
 }
-
-
-//var videoId = document.getElementsByTagName('src');
-//firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-// var player;
-
-// function onYouTubeIframeAPIReady(objeto) {
-//     player = new YT.Player('player', {
-//         videoId: objeto,
-//         events: {
-//             'onReady': onPlayerReady,
-//             'onStateChange': onPlayerStateChange
-//         }
-//     });
-// }
-
-// function onPlayerReady(event) {
-//     event.target.playVideo();
-// }

@@ -11,7 +11,9 @@ function verifica() {
 
     // Mensagem alert
     if (!codvideo) {
+        $('#nomeVideo').val('')
         $('#canal').val('');
+        document.getElementById("nomeVideo").focus();
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
@@ -20,14 +22,19 @@ function verifica() {
         })
 
     } else {
+        var nome = $('#nomeVideo').val()
+
         video = {
-            video: ehVideo
+            video: ehVideo,
+            nome: nome
         }
+
         $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
         $.post('/api/addVideo', video, function(data) {
 
             if (data == 1) {
                 $('#adicionarVideoModal').modal('hide')
+                $('#nomeVideo').val('')
                 $('#canal').val('');
                 Swal.fire({
                     position: 'top-end',
@@ -38,6 +45,7 @@ function verifica() {
                     timer: 1800
                 })
             } else if (data == 0) {
+                $('#nomeVideo').val('')
                 $('#canal').val('');
                 Swal.fire({
                     icon: 'warning',
@@ -47,6 +55,7 @@ function verifica() {
                 })
 
             } else {
+                $('#nomeVideo').val('')
                 $('#canal').val('');
                 Swal.fire({
                     icon: 'warning',

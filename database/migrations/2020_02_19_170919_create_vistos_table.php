@@ -15,7 +15,7 @@ class CreateVistosTable extends Migration
     {
         Schema::create('vistos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('vistoPorVisitante');
+            $table->integer('vistoVisitante');
             $table->timestamps();
             $table->bigInteger('visitante_id')->unsigned();
             $table->bigInteger('video_id')->unsigned();

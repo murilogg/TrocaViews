@@ -15,9 +15,11 @@ class CreateVideosTable extends Migration
     {
         Schema::create('videos', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('nomeVideo');
             $table->string('codigoVideo');
-            $table->integer('vistoPorVideo');
+            $table->integer('vistoVideo');
             $table->boolean('ativo');
+            $table->integer('contador');
             $table->timestamps();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

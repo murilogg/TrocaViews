@@ -127,10 +127,19 @@
             </div>
             <div class="modal-body">
                 <div class="form-group row">
-                    <label for="canal" class="col-lg-3 col-form-label text-md-right">{{ __('Video youtube') }}</label>
-                
+                    <label for="nomeVideo" class="col-lg-3 col-form-label text-md-right">{{ __('Nome do Video') }}</label>
+                    
                     <div class="col-md-8">
-                        <input id="canal" type="text" class="form-control" name="canal" required placeholder="Adicione seu Video">
+                        
+                        <input id="nomeVideo" type="text" class="form-control" name="nomeVideo" required placeholder="Informe nome do Video">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="canal" class="col-lg-3 col-form-label text-md-right">{{ __('Video youtube') }}</label>
+                    
+                    <div class="col-md-8">
+                        
+                        <input id="canal" type="text" class="form-control" name="canal" required placeholder="Adicione seu Link aqui">
                     </div>
                 </div>
             </div>
@@ -153,24 +162,36 @@
                 </button>
             </div>
             <div class="modal-body">
+@if(count($dados) > 0)
                 <table class="table table-ordered table-hover">
                     <thead>
                         <tr>
                             <th>Videos</th>
+                            <th>Vistos</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
     @foreach ($dados as $item)
                         <tr>
-                            <td>{{ $item->id }}</td>
+                            <td>{{ strtoupper($item->nomeVideo) }}</td>
+                            <td>{{ $item->vistoVideo }}</td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="right" title="Desativar">
+                                    <a style="color: white;" href="#"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+                                </button>
+                            </td>
                         </tr>
     @endforeach
-                    </tbody>
+                    </tbody>          
                 </table>
+@else
+                            <div>{{ strtoupper(Auth::user()->name) }} - Você ainda não adicionou nenhum video<i class="fa fa-frown-o fa-2x" style="position:absolute; right: 10%; color: red;" aria-hidden="true"></i></div>  
+                            <br><p>Se você adicionou algum video e não está aparecendo. Por favor atualize a Pàgina</p>               
+@endif
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary" onclick="verifica()">Confirmar</button>
             </div>
         </div>
     </div>
