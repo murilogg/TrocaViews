@@ -21,7 +21,7 @@
     <link href="{{ asset('css/home/home.css') }}" rel="stylesheet">
 @endpush
 
-{{-- <div style="display: none;" id="userId">{{ $user->id }}</div>  --}}
+<div style="display: none;" id="userId">{{ $user->id }}</div> 
 <div class="container">
     <div class="row profile">
         <div class="col-md-3">
@@ -86,12 +86,12 @@
         </div>
         <div class="col-md-9">
             <div class="profile-content">
-                {{-- <iframe id="player" width="100%"  style="height: 400px;" src="https://www.youtube.com/embed/2mM3xjxzns4" frameborder="0" allowfullscreen></iframe> --}}
-                <iframe id="player" type="text/html" width="100%" height="400px" src="" frameborder="0"></iframe>
-                {{-- <div id="player"></div> --}}
-                <div id="number"></div>
+                <div id="player"></div>
+                {{-- <iframe id="player" type="text/html" width="100%" height="400px" src="" frameborder="0"></iframe> --}}
+                {{-- <iframe id="player" type="text/html" width="640" height="360" src="http://www.youtube.com/embed/M7lc1UVf-VE?enablejsapi=1&origin=http://example.com" frameborder="0"></iframe> --}}
             </div>
         </div>
+        <div id="number"></div>
     </div>
 </div>
 
@@ -187,7 +187,7 @@
                 </table>
 @else
                             <div>{{ strtoupper(Auth::user()->name) }} - Você ainda não adicionou nenhum video<i class="fa fa-frown-o fa-2x" style="position:absolute; right: 10%; color: red;" aria-hidden="true"></i></div>  
-                            <br><p>Se você adicionou algum video e não está aparecendo. Por favor atualize a Pàgina</p>               
+                            <br><p>Se você adicionou algum video. Por favor atualize a Pàgina</p>               
 @endif
             </div>
             <div class="modal-footer">

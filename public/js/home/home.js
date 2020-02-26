@@ -1,7 +1,7 @@
 window.onload = function() {
+    mostraVideo()
     sidebarActive()
     userLogado()
-    mostraVideo()
     $('[data-toggle="tooltip"]').tooltip()
 }
 
@@ -34,20 +34,14 @@ function userLogado() {
     }
 }
 
-//document.getElementById("video").onclick = contador();
-//var myVideo = document.querySelector("#video")
-
 function mostraVideo() {
     var media = 0
-    var tag = "http://www.youtube.com/embed/"
+        //var tag = "http://www.youtube.com/embed/"
     var codigo = 0
 
     $.get('/api/obter', function(data) {
         let t = JSON.parse(data);
         let m = JSON.parse(data);
-
-        // var data = new Date();
-        // var min = data.getMinutes(); 
 
         for (var i = 0; i < t.length; i++) {
 
@@ -58,13 +52,12 @@ function mostraVideo() {
         }
         console.log("media depois do for", media)
 
-
         for (var x = 0; x < m.length; x++) {
 
-            if (m[x].vistoVideo == 0) {
+            if (m[x].vistoVideo == 0 && m[x].contador == 1) {
 
                 codigo = m[x].codigoVideo
-                document.getElementById("player").src = tag + codigo
+                    //document.getElementById("player").src = codigo
             } else if (m[x].vistoVideo < media) {
 
                 codigo = m[x].codigoVideo
@@ -75,4 +68,54 @@ function mostraVideo() {
 
         console.log("json.parse: ", t)
     })
+}
+
+var tag = document.createElement('script');
+
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+var player, playing = false;
+
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+        height: "400",
+        width: "100%",
+        videoId: "RWeFOe2Cs4k",
+        events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+        }
+    });
+}
+
+function onPlayerReady(event) {
+    event.target.playVideo();
+}
+
+function stopVideo() {
+    player.stopVideo();
+}
+
+function onPlayerStateChange(event) {
+
+    if (event.data == YT.PlayerState.PLAYING) {
+        playing = true;
+        contador()
+    } else if (event.data == YT.PlayerState.PAUSED) {
+        playing = false;
+    }
+}
+
+function contador() {
+    var n = 0;
+    var l = document.getElementById("number");
+    window.setInterval(function() {
+        l.innerHTML = player.getCurrentTime("%.2f")
+        n++;
+    }, 1000);
+
+    var data = new Date();
+    var min = data.getMinutes();
 }

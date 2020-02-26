@@ -46,7 +46,7 @@ class HomeController extends Controller
 
         $id = Auth::id();
         $codVideo = $request->input('video');
-        $temVideoIgual = Video::where('codigoVideo', $codVideo)->get();
+        $temVideoIgual = Video::where('videoId', $codVideo)->get();
         $firstVideo = DB::table('videos')->where('user_id', '=', $id)->get();
         $videoAtivo = Video::select('videos.id')
                             ->join('users', 'users.id', '=', 'videos.user_id')
@@ -72,10 +72,10 @@ class HomeController extends Controller
 
         $novo = new Video();
         $novo->nomeVideo = $request->input('nome');
-        $novo->codigoVideo = $codVideo;
+        $novo->videoId = $codVideo;
         $novo->vistoVideo = 0;
         $novo->ativo = true;
-        $novo->contador = 1;
+        $novo->contador = 0;
         $novo->created_at = new DateTime();
         $novo->updated_at = new DateTime();
         $novo->user_id = Auth::id();
