@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\User;
 use App\Video;
@@ -85,10 +86,24 @@ class HomeController extends Controller
     }
 
     public function obter(){
-        $userId = Auth::id();
-        $videos = Video::where('user_id', '<>', $userId)->get();
+        // $userId = Auth::id();
+        // $dateNow = Carbon::now();
+        // $videoAtivo = Video::select('videos.id', 'videos.nomeVideo', 'videos.videoId', 'videos.vistoVideo', 'videos.contador', 'videos.user_id')
+        //                     ->orWhere('ativo', '<>', 0)
+        //                     ->where('user_id', '<>', $userId)
+        //                     ->whereRaw("DATEDIFF('" . $dateNow. "',nonrem_created_date)")->get();
         
-        return json_encode($videos);
+        //$value = $dateNow->diffInHours($date1);
+        $from = Carbon::now()->subHour();
+        $to = Carbon::now();
+        //$teste = Video::whereDate('contador', '<', $dateNow)->get(); 
+        $record = DB::table('videos')
+                            ->select("*")
+                            ->where("ativo", "<>", 0)
+                            ->where('contador', '<', DB::raw('NOW() - INTERVAL 1 HOUR'))
+                            ->get();
+
+        return json_encode($record);
     }
 
 }

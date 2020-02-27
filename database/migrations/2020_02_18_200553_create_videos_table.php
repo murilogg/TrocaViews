@@ -19,7 +19,7 @@ class CreateVideosTable extends Migration
             $table->string('videoId');
             $table->integer('vistoVideo');
             $table->boolean('ativo');
-            $table->integer('contador');
+            $table->dateTime('contador'); //exibir video dentro de 1 hr
             $table->timestamps();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

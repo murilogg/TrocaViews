@@ -89,9 +89,20 @@
                 <div id="player"></div>
                 {{-- <iframe id="player" type="text/html" width="100%" height="400px" src="" frameborder="0"></iframe> --}}
                 {{-- <iframe id="player" type="text/html" width="640" height="360" src="http://www.youtube.com/embed/M7lc1UVf-VE?enablejsapi=1&origin=http://example.com" frameborder="0"></iframe> --}}
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-11 text-left">
+                            <div id="number"></div>
+                        </div>
+                        <div class="col-1 text-right">
+                            <button class="btn btn-primary btn-sm" style="text-align: right;" data-toggle="tooltip" data-placement="right" title="Proximo">
+                                <a style="color: white;" href="#"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div id="number"></div>
     </div>
 </div>
 
