@@ -105,23 +105,18 @@ function onYouTubeIframeAPIReady() {
 
         for (var x = 0; x < t.length; x++) {
             if (t[x].vistoVideo == 0 && t[x].contador == 0) {
-                console.log("reproduzindo este 0: ", t[x].vistoVideo)
                 codigo = t[x].videoId
                 break
             } else if (t[x].vistoVideo == x) {
-                console.log("reproduzindo este x : ", t[x].vistoVideo)
                 codigo = t[x].videoId
                 break
             } else if ([x].vistoVideo < mediaMenor) {
-                console.log("reproduzindo este <Menor: ", t[x].vistoVideo)
                 codigo = t[x].videoId
                 break
             } else if (t[x].vistoVideo < media) {
-                console.log("reproduzindo este <: ", t[x].vistoVideo, media, mediaMenor)
                 codigo = t[x].videoId
                 break
             } else {
-                console.log("reproduzindo este else: ", t[x].vistoVideo, media, mediaMenor)
                 codigo = t[x].videoId
             }
         }

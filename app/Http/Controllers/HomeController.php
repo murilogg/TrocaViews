@@ -67,7 +67,7 @@ class HomeController extends Controller
         if(count($firstVideo) == 0){
             $user = User::find(Auth()->id());            
             $user->limit = 2;
-            $user->updated_at = new DateTime();
+            $user->updated_at = Carbon::now(new DateTimeZone('America/Cuiaba'));
             $user->save();
         }
 
@@ -77,8 +77,8 @@ class HomeController extends Controller
         $novo->vistoVideo = 0;
         $novo->ativo = true;
         $novo->contador = 0;
-        $novo->created_at = new DateTime();
-        $novo->updated_at = new DateTime();
+        $novo->created_at = Carbon::now(new DateTimeZone('America/Cuiaba'));
+        $novo->updated_at = Carbon::now(new DateTimeZone('America/Cuiaba'));
         $novo->user_id = Auth::id();
         $novo->save();
 
@@ -86,17 +86,6 @@ class HomeController extends Controller
     }
 
     public function obter(){
-        // $userId = Auth::id();
-        // $dateNow = Carbon::now();
-        // $videoAtivo = Video::select('videos.id', 'videos.nomeVideo', 'videos.videoId', 'videos.vistoVideo', 'videos.contador', 'videos.user_id')
-        //                     ->orWhere('ativo', '<>', 0)
-        //                     ->where('user_id', '<>', $userId)
-        //                     ->whereRaw("DATEDIFF('" . $dateNow. "',nonrem_created_date)")->get();
-        
-        //$value = $dateNow->diffInHours($date1);
-        $from = Carbon::now()->subHour();
-        $to = Carbon::now();
-        //$teste = Video::whereDate('contador', '<', $dateNow)->get(); 
         $record = DB::table('videos')
                             ->select("*")
                             ->where("ativo", "<>", 0)

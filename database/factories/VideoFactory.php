@@ -11,8 +11,10 @@ $factory->define(App\Video::class, function (Faker $faker) {
         'nomeVideo' => $faker->title,
         'videoId' => 'KRTPBRHl258',
         'vistoVideo' => $faker->randomDigit,
-        'ativo' => 1,
-        'contador' => Carbon::now(new DateTimeZone('America/Sao_Paulo')),
+        'ativo' => 0,
+        'contador' => Carbon::now(new DateTimeZone('America/Chicago')),
+        'created_at' => Carbon::now(new DateTimeZone('America/Cuiaba')),
+        'updated_at' => Carbon::now(new DateTimeZone('America/Cuiaba')),
         'user_id' => factory(App\User::class)
     ];
 });
