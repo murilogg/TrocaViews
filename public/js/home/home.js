@@ -4,6 +4,9 @@ window.onload = function() {
     $('[data-toggle="tooltip"]').tooltip()
 }
 
+let t 
+var idVideoAtual
+
 function sidebarActive() {
     var div = document.getElementById("ul")
     var lb = div.getElementsByClassName("nav-item")
@@ -20,55 +23,107 @@ function sidebarActive() {
 function userLogado() {
     var logado = $('#userId').text();
     if (logado != 0) {
-        Swal.fire({
-                title: 'Seja Bem-Vindo! ',
-                text: 'Você está logado!',
-                icon: 'success',
-                showConfirmButton: false,
-                timer: 2500
-            })
+        mensagens(false, "Seja Bem-Vindo!", "Você está logado!", "success", false, 2500, false)
             // setTimeout(function() {
             //     $('#userLogado').modal('hide');
             // }, 3000); // 3000 = 3 segundos
     }
 }
 
-// function mostraVideo() {
-//     var media = 0
-//         //var tag = "http://www.youtube.com/embed/"
-//     var codigo = 0
+function mensagens(position, title, text, icon, button, timer, footer) {
+    Swal.fire({
+        position: position,
+        title: title,
+        text: text,
+        icon: icon,
+        showConfirmButton: button,
+        timer: timer,
+        footer: footer
+    })
+}
 
-//     $.get('/api/obter', function(data) {
-//         let t = JSON.parse(data);
-//         let m = JSON.parse(data);
+function proximo() {
+    var start = "https://www.youtube.com/embed/"
+    var finish = "?autoplay=1&controls=0&enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A8000&widgetid=1"
+    var codigo = 0
+    var media = 0
+    var cont = 0
+    var mediaMenor = 0
+    var contMenor = 0
+    var menor = 0
 
-//         for (var i = 0; i < t.length; i++) {
+    console.log(t)
+    console.log(idVideoAtual)
 
-//             if (t[i].vistoVideo > 0) {
-//                 media += window.matchMedia(t[i].vistoVideo)
-//                 console.log("media for", media)
-//             }
-//         }
-//         console.log("media depois do for", media)
+    for (var i = 0; i < t.length; i++) {
+        if(t[i].id == idVideoAtual){
+            t[i].vistoVideo += 1
+        }
+        if (t[i].vistoVideo > 0) {
+            media += t[i].vistoVideo
+            cont++
+        }
+    }
+    media = media / cont
 
-//         for (var x = 0; x < m.length; x++) {
+    for (var i = 0; i < t.length; i++) {
+        if (t[i].vistoVideo > 0 && t[i].vistoVideo < media) {
+            mediaMenor += t[i].vistoVideo
+            contMenor++
+        }
+    }
+    mediaMenor = mediaMenor / contMenor
+    menor = media - mediaMenor
 
-//             if (m[x].vistoVideo == 0 && m[x].contador == 0) {
+    for (var x = 0; x < t.length; x++) {
+        if (t[x].vistoVideo == 0 && t[x].contador == 0) {
+            codigo = t[x].videoId
+            start +=codigo + finish
+            idVideoAtual = t[x].id
+            document.getElementById("player").src = start
+            break
+        } else if ([x].vistoVideo < menor) {
+            codigo = t[x].videoId
+            start +=codigo + finish
+            idVideoAtual = t[x].id
+            document.getElementById("player").src = start
+            break
+        } else if ([x].vistoVideo < mediaMenor) {
+            codigo = t[x].videoId
+            start +=codigo + finish
+            idVideoAtual = t[x].id
+            document.getElementById("player").src = start
+            break
+        } else if (t[x].vistoVideo < media) {
+            codigo = t[x].videoId
+            start +=codigo + finish
+            idVideoAtual = t[x].id
+            document.getElementById("player").src = start
+            break
+        } else {
+            codigo = t[x].videoId
+            start +=codigo + finish
+            idVideoAtual = t[x].id
+            document.getElementById("player").src = start
+        }
+    }
 
-//                 codigo = m[x].videoId
-//                 onYouTubeIframeAPIReady(codigo)
-//                     //document.getElementById("player").src = codigo
-//             } else if (m[x].vistoVideo < media) {
+    for (var x = 0; x < m.length; x++) {
 
-//                 codigo = m[x].videoId
-//                 document.getElementById("player").src = tag + codigo
-//                 media += m[x].vistoVideo
-//             }
-//         }
+        if (m[x].vistoVideo == 0 && m[x].contador == 0) {
 
-//         console.log("json.parse: ", t)
-//     })
-// }
+            codigo = m[x].videoId
+            
+        } else if (m[x].vistoVideo < media) {
+
+            codigo = m[x].videoId
+            document.getElementById("player").src = tag + codigo
+            media += m[x].vistoVideo
+        }
+    }
+
+    console.log("json.parse: ", t)
+}
 
 var tag = document.createElement('script');
 
@@ -84,9 +139,10 @@ function onYouTubeIframeAPIReady() {
     var cont = 0
     var mediaMenor = 0
     var contMenor = 0
+    var menor = 0 
     $.get('/api/obter', function(data) {
 
-        let t = JSON.parse(data);
+        t = JSON.parse(data);
         for (var i = 0; i < t.length; i++) {
             if (t[i].vistoVideo > 0) {
                 media += t[i].vistoVideo
@@ -102,22 +158,24 @@ function onYouTubeIframeAPIReady() {
             }
         }
         mediaMenor = mediaMenor / contMenor
+        menor = media - mediaMenor
 
         for (var x = 0; x < t.length; x++) {
             if (t[x].vistoVideo == 0 && t[x].contador == 0) {
                 codigo = t[x].videoId
-                break
-            } else if (t[x].vistoVideo == x) {
-                codigo = t[x].videoId
+                idVideoAtual = t[x].id
                 break
             } else if ([x].vistoVideo < mediaMenor) {
                 codigo = t[x].videoId
+                idVideoAtual = t[x].id
                 break
             } else if (t[x].vistoVideo < media) {
                 codigo = t[x].videoId
+                idVideoAtual = t[x].id
                 break
             } else {
                 codigo = t[x].videoId
+                idVideoAtual = t[x].id
             }
         }
 

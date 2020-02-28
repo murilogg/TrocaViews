@@ -7,6 +7,7 @@
 @push('components')
     <!-- Scripts -->
     <script type="text/javascript" src="{{ asset('js/home/verificaVideo.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/home/funcaoVideo.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/home/home.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
@@ -91,12 +92,12 @@
                 {{-- <iframe id="player" type="text/html" width="640" height="360" src="http://www.youtube.com/embed/M7lc1UVf-VE?enablejsapi=1&origin=http://example.com" frameborder="0"></iframe> --}}
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-11 text-left">
+                        <div class="col-10 text-left">
                             <div id="number"></div>
                         </div>
-                        <div class="col-1 text-right">
-                            <button class="btn btn-primary btn-sm" style="text-align: right;" data-toggle="tooltip" data-placement="right" title="Proximo">
-                                <a style="color: white;" href="#"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                        <div class="col-2 text-right">
+                            <button type="button" class="btn btn-success btn-sm" style="text-align: right;" onclick="proximo()" data-toggle="tooltip" data-placement="right" title="VIDEO">
+                                PRÓXIMO
                             </button>
                         </div>
                     </div>
@@ -141,22 +142,27 @@
                     <label for="nomeVideo" class="col-lg-3 col-form-label text-md-right">{{ __('Nome do Video') }}</label>
                     
                     <div class="col-md-8">
-                        
-                        <input id="nomeVideo" type="text" class="form-control" name="nomeVideo" required placeholder="Informe nome do Video">
+                        <input id="nomeVideo" type="text" class="form-control" name="nomeVideo" minlength="4" maxlength="30" size="25" required placeholder="Informe nome do Video">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="canal" class="col-lg-3 col-form-label text-md-right">{{ __('Video youtube') }}</label>
                     
                     <div class="col-md-8">
-                        
                         <input id="canal" type="text" class="form-control" name="canal" required placeholder="Adicione seu Link aqui">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="verifica" class="col-lg-3 col-form-label text-md-right">{{ __('Verifica Video') }}</label>
+                    
+                    <div id="btn" class="col-md-8">
+                        <button type="button" class="btn btn-primary" onclick="verifica()" id="verificaVideo">Verificar Video</button>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary" onclick="verifica()">Confirmar</button>
+                <button type="button" class="btn btn-primary" onclick="salva()">Adicionar</button>
             </div>
         </div>
     </div>
@@ -167,7 +173,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Adicionar Video</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Desabilitar Video</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -178,7 +184,7 @@
                     <thead>
                         <tr>
                             <th>Videos</th>
-                            <th>Vistos</th>
+                            <th>Visualizado</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -188,9 +194,15 @@
                             <td>{{ strtoupper($item->nomeVideo) }}</td>
                             <td>{{ $item->vistoVideo }}</td>
                             <td>
-                                <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="right" title="Desativar">
-                                    <a style="color: white;" href="#"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+        @if($item->ativo == 0)
+                                <button class="btn btn-success btn-sm" onclick="ativarVideo({{ $item->id }})" data-toggle="tooltip" data-placement="right" title="Ativar">
+                                    <a style="color: white;" href="javascript:;"><i class="fa fa-power-off" aria-hidden="true"></i></a>
                                 </button>
+        @else
+                                <button class="btn btn-danger btn-sm" onclick="desativaVideo({{ $item->id }})" data-toggle="tooltip" data-placement="right" title="Desativar">
+                                    <a style="color: white;" href="javascript:;"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+                                </button>
+        @endif
                             </td>
                         </tr>
     @endforeach
