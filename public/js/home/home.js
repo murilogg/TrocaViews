@@ -77,7 +77,7 @@ function proximo() {
     menor = media - mediaMenor
 
     for (var x = 0; x < t.length; x++) {
-        if (t[x].vistoVideo == 0 && t[x].contador == 0) {
+        if (t[x].vistoVideo == 0 && t[x].contadorHr == 0) {
             codigo = t[x].videoId
             start += codigo + finish
             idVideoAtual = t[x].id
@@ -106,20 +106,6 @@ function proximo() {
             start += codigo + finish
             idVideoAtual = t[x].id
             document.getElementById("player").src = start
-        }
-    }
-
-    for (var x = 0; x < m.length; x++) {
-
-        if (m[x].vistoVideo == 0 && m[x].contador == 0) {
-
-            codigo = m[x].videoId
-
-        } else if (m[x].vistoVideo < media) {
-
-            codigo = m[x].videoId
-            document.getElementById("player").src = tag + codigo
-            media += m[x].vistoVideo
         }
     }
 
@@ -162,7 +148,7 @@ function onYouTubeIframeAPIReady() {
         menor = media - mediaMenor
 
         for (var x = 0; x < t.length; x++) {
-            if (t[x].vistoVideo == 0 && t[x].contador == 0) {
+            if (t[x].vistoVideo == 0 && t[x].contadorHr == 0) {
                 codigo = t[x].videoId
                 idVideoAtual = t[x].id
                 break
@@ -205,19 +191,19 @@ function onPlayerStateChange(event) {
 
     if (event.data == YT.PlayerState.PLAYING) {
         playing = true;
-        contador()
+        contadorTempo()
     } else if (event.data == YT.PlayerState.PAUSED) {
         playing = false;
     }
 }
 
-function contador() {
+function contadorTempo() {
     var n = 0
     var v = 0
     var l = document.getElementById("number");
     window.setInterval(function() {
         v = player.getCurrentTime()
-        l.innerHTML = "Credito: " + parseFloat(v.toFixed(0))
+        l.innerHTML = "Tempo: " + parseFloat(v.toFixed(0))
         n++;
     }, 1000);
 

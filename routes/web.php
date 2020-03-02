@@ -10,7 +10,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/troca', 'HomeController@logado')->name('homeLogado');
-Route::get('/ativaDesativa/{id}', 'HomeController@ativaDesativa')->name('ativaDesativa');
+Route::get('/ranking', 'HomeController@logado')->name('homeLogado');
+
+
+Route::get('/api/ativaDesativa/{id}', 'HomeController@ativaDesativa')->name('ativaDesativa');
 
 //Controlador API
 Route::post('/api/addVideo', 'HomeController@addVideo')->name('adicionaVideo');
