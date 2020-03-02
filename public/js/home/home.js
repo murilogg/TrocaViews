@@ -2,9 +2,10 @@ window.onload = function() {
     sidebarActive()
     userLogado()
     $('[data-toggle="tooltip"]').tooltip()
+    document.getElementById("adiciona").disabled = true;
 }
 
-let t 
+let t
 var idVideoAtual
 
 function sidebarActive() {
@@ -23,7 +24,7 @@ function sidebarActive() {
 function userLogado() {
     var logado = $('#userId').text();
     if (logado != 0) {
-        mensagens(false, "Seja Bem-Vindo!", "Você está logado!", "success", false, 2500, false)
+        mensagens("center", "Seja Bem-Vindo!", "Você está logado!", "success", false, 2500, false)
             // setTimeout(function() {
             //     $('#userLogado').modal('hide');
             // }, 3000); // 3000 = 3 segundos
@@ -56,7 +57,7 @@ function proximo() {
     console.log(idVideoAtual)
 
     for (var i = 0; i < t.length; i++) {
-        if(t[i].id == idVideoAtual){
+        if (t[i].id == idVideoAtual) {
             t[i].vistoVideo += 1
         }
         if (t[i].vistoVideo > 0) {
@@ -78,31 +79,31 @@ function proximo() {
     for (var x = 0; x < t.length; x++) {
         if (t[x].vistoVideo == 0 && t[x].contador == 0) {
             codigo = t[x].videoId
-            start +=codigo + finish
+            start += codigo + finish
             idVideoAtual = t[x].id
             document.getElementById("player").src = start
             break
         } else if ([x].vistoVideo < menor) {
             codigo = t[x].videoId
-            start +=codigo + finish
+            start += codigo + finish
             idVideoAtual = t[x].id
             document.getElementById("player").src = start
             break
         } else if ([x].vistoVideo < mediaMenor) {
             codigo = t[x].videoId
-            start +=codigo + finish
+            start += codigo + finish
             idVideoAtual = t[x].id
             document.getElementById("player").src = start
             break
         } else if (t[x].vistoVideo < media) {
             codigo = t[x].videoId
-            start +=codigo + finish
+            start += codigo + finish
             idVideoAtual = t[x].id
             document.getElementById("player").src = start
             break
         } else {
             codigo = t[x].videoId
-            start +=codigo + finish
+            start += codigo + finish
             idVideoAtual = t[x].id
             document.getElementById("player").src = start
         }
@@ -113,7 +114,7 @@ function proximo() {
         if (m[x].vistoVideo == 0 && m[x].contador == 0) {
 
             codigo = m[x].videoId
-            
+
         } else if (m[x].vistoVideo < media) {
 
             codigo = m[x].videoId
@@ -139,7 +140,7 @@ function onYouTubeIframeAPIReady() {
     var cont = 0
     var mediaMenor = 0
     var contMenor = 0
-    var menor = 0 
+    var menor = 0
     $.get('/api/obter', function(data) {
 
         t = JSON.parse(data);

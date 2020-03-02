@@ -1,5 +1,5 @@
 var ehVideo
-var button
+var button = 0
 var playerVerifica, playingV = false;
 
 function isYoutubeVideo(url) {
@@ -8,47 +8,42 @@ function isYoutubeVideo(url) {
 }
 
 function verifica() {
-    button = document.getElementById("verificaVideo")
-    var video = $('#canal').val();
-
-    ehVideo = isYoutubeVideo(video);
-    var codvideo = ehVideo
-
     var nome = $('#nomeVideo').val()
-    if(document.getElementById("nomeVideo").value.length < 4){
-        mensagens("center", "Insira o nome do Video", "Minimo 4, Maximo 30", "warning", true, false, "")
-        document.getElementById("nomeVideo").focus();
+    var video = $('#canal').val()
+
+    if (!button) {
+        button = document.getElementById("verificaVideo")
     }
 
-    // Mensagem alert
-    if (!codvideo) {
-        $('#nomeVideo').val('')
-        $('#canal').val('')
-        $('#verificaVideo').val('')
-        document.getElementById("nomeVideo").focus();
-        mensagens(false, "Oops...", "Video não encontrado!", "error", true, false, "<a href>Você está fazendo certo?</a>")
-
+    if (nome.length < 4) {
+        mensagens("center", "Insira o nome do Video", "Minimo 4, Maximo 30", "warning", true, false, "")
     } else {
-        playerVerifica = new YT.Player('verificaVideo', {
-            height: "200",
-            width: "100%",
-            videoId: ehVideo,
-            playerVars: { 'autoplay': 1, 'controls': 0 },
-            events: {
-                'onReady': onPlayerVReady,
-                'onStateChange': onPlayerVStateChange
-            }
-        })
+        ehVideo = isYoutubeVideo(video);
+        var codvideo = ehVideo
+
+        // Mensagem alert
+        if (!codvideo) {
+            campoVazio()
+            mensagens("center", "Oops...", "Video não encontrado!", "error", true, false, "<a href>Você está fazendo certo?</a>")
+
+        } else {
+            document.getElementById("adiciona").disabled = false
+            playerVerifica = new YT.Player('verificaVideo', {
+                height: "200",
+                width: "100%",
+                videoId: ehVideo,
+                playerVars: { 'autoplay': 1, 'controls': 0 },
+                events: {
+                    'onReady': onPlayerVReady,
+                    'onStateChange': onPlayerVStateChange
+                }
+            })
+        }
     }
 }
 
-function salva(){
+function salva() {
     var nome = $('#nomeVideo').val()
-    if(document.getElementById("nomeVideo").value.length < 4){
-        mensagens("center", "Insira o nome do Video", "Minimo 4, Maximo 30", "warning", true, false, "")
-        document.getElementById("nomeVideo").focus();
-    }
-    verifica()
 
     video = {
         video: ehVideo,
@@ -59,37 +54,31 @@ function salva(){
     $.post('/api/addVideo', video, function(data) {
 
         if (data == 1) {
-            $('#adicionarVideoModal').modal('hide')
-            $('#nomeVideo').val('')
-            $('#canal').val('')
-            removeButton()
-            var text = "Código do vídeo: " + codvideo
+            fechaModalAdicionar()
+            var text = "Código do vídeo: " + ehVideo
             mensagens("top-end", "Video adicionado com Sucesso", text, "success", false, 1800, false)
-            
+
         } else if (data == 0) {
-            $('#nomeVideo').val('')
-            $('#canal').val('')
-            removeButton()
-            mensagens(false, "Atenção..!", "Este video já está cadastrado !", "warning", true, false, "<p>O sistema não aceita videos iguais</p>")
+            document.getElementById("adiciona").disabled = true
+            mensagens("center", "Atenção..!", "Este video já está cadastrado !", "warning", true, false, "<p>O sistema não aceita videos iguais</p>")
 
         } else {
-            $('#nomeVideo').val('')
-            $('#canal').val('')
-            removeButton()
-            mensagens(false, "Atenção..!", "Só é permitido adicionar 2 videos !", "warning", true, false, "<a href>Assine premium, e adicione mais Videos</a>")
+            document.getElementById("adiciona").disabled = true
+            mensagens("center", "Atenção..!", "Só é permitido adicionar 2 videos !", "warning", true, false, "<a href>Assine premium, e adicione mais Videos</a>")
         }
         console.log(data)
+        campoVazio()
+        removeButton()
     })
 }
 
 function onPlayerVReady(event) {
     event.target.playVideo();
     var temp = playerVerifica.getDuration()
-    if(temp < 60){
-        $('#nomeVideo').val('')
-        $('#canal').val('')
+    if (temp < 60) {
+        campoVazio()
         removeButton()
-        mensagens(false, "Video curto..!", "Só é permitido videos acima de 1 minuto !", "error", true, false, "<a href>Você está fazendo certo?</a>")
+        mensagens("center", "Video curto..!", "Só é permitido videos acima de 1 minuto !", "error", true, false, "<a href>Você está fazendo certo?</a>")
     }
 }
 
@@ -102,11 +91,28 @@ function onPlayerVStateChange(event) {
     }
 }
 
-function removeButton() { 
+function removeButton() {
     var node = document.getElementById("verificaVideo")
     if (node.parentNode) {
         node.parentNode.removeChild(node);
         var div = document.getElementById("btn")
         div.appendChild(button)
     }
+}
+
+function campoVazio() {
+    $('#nomeVideo').val('')
+    $('#canal').val('')
+}
+
+function abriModalAdicionar() {
+    campoVazio()
+    document.getElementById("adiciona").disabled = true
+    $('#adicionarVideoModal').modal('show')
+}
+
+function fechaModalAdicionar() {
+    campoVazio()
+    document.getElementById("adiciona").disabled = true
+    $('#adicionarVideoModal').modal('hide')
 }

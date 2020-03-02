@@ -44,10 +44,11 @@ class HomeController extends Controller
     public function addVideo(Request $request){
 
         $id = Auth::id();
+        $user = User::find(Auth()->id()); 
         $codVideo = $request->input('video');
         $temVideoIgual = Video::where('videoId', $codVideo)->get();
         $firstVideo = DB::table('videos')->where('user_id', '=', $id)->get();
-        $videoAtivo = Video::select('videos.id')
+        $videoAtivo = Video::select('videos.ativo')
                             ->join('users', 'users.id', '=', 'videos.user_id')
                             ->orWhere('ativo', '<>', 0)
                             ->where('user_id', '=', $id)->get();
@@ -57,16 +58,15 @@ class HomeController extends Controller
             return 0;
         }
 
-        if(count($videoAtivo) == 2){
-           
-            return 2;
-        }
-
-        if(count($firstVideo) == 0){
-            $user = User::find(Auth()->id());            
+        if(count($firstVideo) == 0){           
             $user->limit = 2;
             $user->updated_at = now();
             $user->save();
+        }
+
+        if(count($videoAtivo) >= 2){
+           
+            return 2;
         }
 
         $novo = new Video();

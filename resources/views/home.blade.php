@@ -50,7 +50,7 @@
                 <!-- END SIDEBAR USER TITLE -->
                 <!-- SIDEBAR BUTTONS -->
                 <div class="profile-userbuttons">
-                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#adicionarVideoModal">Adicionar</button>
+                    <button type="button" class="btn btn-success btn-sm" onclick="abriModalAdicionar()">Adicionar</button>
                     <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#removerVideoModal">Remover</button>
                 </div>
                 <!-- END SIDEBAR BUTTONS -->
@@ -161,8 +161,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary" onclick="salva()">Adicionar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="fechaModalAdicionar()">Fechar</button>
+                <button id="adiciona" type="button" class="btn btn-primary" onclick="salva()">Adicionar</button>
             </div>
         </div>
     </div>
@@ -180,11 +180,12 @@
             </div>
             <div class="modal-body">
 @if(count($dados) > 0)
-                <table class="table table-ordered table-hover">
+                <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th>Videos</th>
-                            <th>Visualizado</th>
+                            <th>VIDEOS</th>
+                            <th>STATUS</th>
+                            <th>VISUALIZADO</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -192,6 +193,11 @@
     @foreach ($dados as $item)
                         <tr>
                             <td>{{ strtoupper($item->nomeVideo) }}</td>
+        @if($item->ativo == 1)
+                            <td>ATIVADO</td>
+        @else
+                            <td>DESATIVADO</td>
+        @endif
                             <td>{{ $item->vistoVideo }}</td>
                             <td>
         @if($item->ativo == 0)
