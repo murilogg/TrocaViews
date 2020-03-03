@@ -19,6 +19,7 @@ class SettingController extends Controller
         $id = Auth()->id();
         $data = Carbon::now();
         $user = User::find(Auth()->id());
+        $user->id = 0;
         $dados = Video::select('videos.id', 'videos.nomeVideo', 'videos.vistoVideo', 'videos.ativo', 
                         'videos.contadorHr', 'videos.contadorDia', DB::raw('now() as dataServidor'))
                             ->join('users', 'users.id', '=', 'videos.user_id')

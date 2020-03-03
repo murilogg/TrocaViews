@@ -67,16 +67,16 @@ body {
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        @guest
+    @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Logar') }}</a>
                             </li>
-                            @if (Route::has('register'))
+        @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Registrar') }}</a>
                                 </li>
-                            @endif
-                        @else
+        @endif
+    @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -94,13 +94,14 @@ body {
                                     </form>
                                 </div>
                             </li>
-                        @endguest
+    @endguest
                     </ul>
                 </div>
             </div>
         </nav>
         
         <main class="py-4">
+    @if(Auth::user())
             <div style="display: none;" id="userId">{{ $user->id }}</div>  
             <div class="container">
                 <div class="row profile">
@@ -137,7 +138,7 @@ body {
                             <div class="profile-usermenu">
                                 <ul id="ul">
                                     <li class="nav-item active" >
-                                        <a href="{{ url('/troca') }}">
+                                        <a href="{{ url('/geral') }}">
                                         <i class="fa fa-home fa-2x" aria-hidden="true"></i>
                                         Visão geral </a>
                                     </li>
@@ -155,9 +156,9 @@ body {
                                     </li>
                                     <br>
                                     <li class="nav-item">
-                                        <a href="{{ url('/tarefas') }}">
+                                        <a href="{{ url('/tarefa') }}">
                                         <i class="fa fa-th-list" aria-hidden="true"></i>
-                                        Tarefas </a>
+                                        Conquistas </a>
                                     </li>
                                     <br>
                                     <li class="nav-item">
@@ -177,6 +178,9 @@ body {
                     </div>
                 </div>
             </div>
+    @else
+            @yield('content') 
+    @endif
         </main>
         <div class="push"></div>
     </div>
