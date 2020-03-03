@@ -143,3 +143,15 @@ ul {
     font-size: 20px;
     color: #434343;
 }
+
+
+/* Button verifica video */
+
+div.one {
+    text-align: center;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}

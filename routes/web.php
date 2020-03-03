@@ -10,7 +10,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/troca', 'HomeController@logado')->name('homeLogado');
-Route::get('/ranking', 'HomeController@logado')->name('homeLogado');
+Route::get('/ranking', function(){
+    return view('ranking');
+});
 
 
 Route::get('/api/ativaDesativa/{id}', 'HomeController@ativaDesativa')->name('ativaDesativa');

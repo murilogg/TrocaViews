@@ -1,36 +1,56 @@
-/* http://www.jquery2dotnet.com/ */
-
-body {
-    margin-top: 20px;
+.btn-grey {
+    background-color: #D8D8D8;
+    color: #FFF;
 }
 
-.glyphicon {
-    margin-right: 5px;
+.rating-block {
+    background-color: rgba(250, 250, 250, 0.733);
+    border: 1px solid #EFEFEF;
+    padding: 10px 15px 20px 15px;
+    border-radius: 10px;
+    min-height: 100%;
 }
 
-.rating .glyphicon {
-    font-size: 22px;
+.rating {
+    padding: 10px 0px 0px 0px;
 }
 
-.rating-num {
-    margin-top: 0px;
-    font-size: 54px;
+.bold {
+    font-weight: 700;
 }
 
-.progress {
-    margin-bottom: 5px;
+.padding-bottom-7 {
+    padding-bottom: 7px;
 }
 
-.progress-bar {
-    text-align: left;
+.review-block {
+    background-color: #FAFAFA;
+    border: 1px solid #EFEFEF;
+    padding: 15px;
+    border-radius: 3px;
+    margin-bottom: 15px;
 }
 
-.rating-desc .col-md-3 {
-    padding-right: 0px;
+.review-block-name {
+    font-size: 12px;
+    margin: 10px 0;
 }
 
-.sr-only {
-    margin-left: 5px;
-    overflow: visible;
-    clip: auto;
+.review-block-date {
+    font-size: 12px;
+}
+
+.review-block-rate {
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.review-block-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.review-block-description {
+    font-size: 13px;
 }

@@ -1,119 +1,27 @@
 @extends('layouts.app')
 
-
 @section('content')
 
+{{-- @push('components')
+    
+@endpush --}}
 
-@push('components')
-    <!-- Scripts -->
-    <script type="text/javascript" src="{{ asset('js/home/verificaVideo.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/home/funcaoVideo.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/home/home.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-
-    <!-- Scripts Sidebar -->
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-    <!-- Link Sidebar -->
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" id="bootstrap-css">
-
-    <!-- Styles sidebar-->
-    <link href="{{ asset('css/home/home.css') }}" rel="stylesheet">
-@endpush
-
-<div style="display: none;" id="userId">{{ $user->id }}</div> 
-<div class="container">
-    <div class="row profile">
-        <div class="col-md-3">
-            <div class="profile-sidebar">
-                <!-- SIDEBAR USERPIC -->
-                <div class="profile-userpic">
-                    @if ($user)
-                        <img src="{{ $user->name }}" class="img-responsive" alt="">    
-                    @else
-                        <i class="fa fa-user" aria-hidden="true"></i>  
-                    @endif
-                </div>
-
-                <!-- END SIDEBAR USERPIC -->
-                <!-- SIDEBAR USER TITLE -->
-                <div class="profile-usertitle">
-                    <div class="profile-usertitle-name" style="">
-                        {{ strtoupper(Auth::user()->name) }}
-                    </div>
-                    <div class="profile-usertitle-job">
-                        <i class="fa fa-youtube-play profile-usermenu" aria-hidden="true"></i> youtuber
-                    </div>
-                </div>
-                <hr>
-                <!-- END SIDEBAR USER TITLE -->
-                <!-- SIDEBAR BUTTONS -->
-                <div class="profile-userbuttons">
-                    <button type="button" class="btn btn-success btn-sm" onclick="abriModalAdicionar()">Adicionar</button>
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#removerVideoModal">Funções</button>
-                </div>
-                <!-- END SIDEBAR BUTTONS -->
-                <!-- SIDEBAR MENU -->
-                <div class="profile-usermenu">
-                    <ul id="ul">
-                        <li class="nav-item active" >
-                            <a href="{{ url('/troca') }}">
-                            <i class="fa fa-home fa-2x" aria-hidden="true"></i>
-                            Visão geral </a>
-                        </li>
-                        <br>
-                        <li class="nav-item" >
-                            <a href="{{ url('/ranking') }}">
-                            <i class="fa fa-star fa-2x" aria-hidden="true"></i>
-                            Ranking</a>
-                        </li>
-                        <br>
-                        <li class="nav-item">
-                            <a href="#">
-                            <i class="fa fa-cogs" aria-hidden="true"></i>		
-                            Configurações </a>
-                        </li>
-                        <br>
-                        <li class="nav-item">
-                            <a href="#">
-                            <i class="fa fa-th-list" aria-hidden="true"></i>
-                            Tarefas </a>
-                        </li>
-                        <br>
-                        <li class="nav-item">
-                            <a href="#">
-                            <i class="fa fa-question-circle" aria-hidden="true"></i>
-                            Ajuda </a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- END MENU -->
-            </div>
+<div id="player"></div>
+{{-- <iframe id="player" type="text/html" width="100%" height="400px" src="" frameborder="0"></iframe> --}}
+{{-- <iframe id="player" type="text/html" width="640" height="360" src="http://www.youtube.com/embed/M7lc1UVf-VE?enablejsapi=1&origin=http://example.com" frameborder="0"></iframe> --}}
+<div class="card-body">
+    <div class="row">
+        <div class="col-10 text-left">
+            <div id="number"></div>
         </div>
-        <div class="col-md-9">
-            <div class="profile-content">
-                <div id="player"></div>
-                {{-- <iframe id="player" type="text/html" width="100%" height="400px" src="" frameborder="0"></iframe> --}}
-                {{-- <iframe id="player" type="text/html" width="640" height="360" src="http://www.youtube.com/embed/M7lc1UVf-VE?enablejsapi=1&origin=http://example.com" frameborder="0"></iframe> --}}
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-10 text-left">
-                            <div id="number"></div>
-                        </div>
-                        <div class="col-2 text-right">
-                            <button type="button" class="btn btn-success btn-sm" style="text-align: right; font-size: 14px;" onclick="proximo()" data-toggle="tooltip" data-placement="right" title="VIDEO">
-                                PRÓXIMO
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="col-2 text-right">
+            <button type="button" class="btn btn-success btn-sm" style="text-align: right; font-size: 14px;" onclick="proximo()" data-toggle="tooltip" data-placement="right" title="VIDEO">
+                PRÓXIMO
+            </button>
         </div>
     </div>
 </div>
-
-
+            
 {{-- Modal user logado --}}
 <div class="modal fade" id="userLogado">
     <div class="modal-dialog modal-lg">
@@ -161,8 +69,8 @@
                 <div class="form-group row">
                     <label for="verifica" class="col-lg-3 col-form-label text-md-right">{{ __('Verifica Video') }}</label>
                     
-                    <div id="btn" class="col-md-8">
-                        <button type="button" class="btn btn-primary" onclick="verifica()" id="verificaVideo">Verificar Video</button>
+                    <div id="btn" class="col-md-8 one">
+                        <button type="button" class="btn btn-primary btn-block" onclick="verifica()" id="verificaVideo">Verificar Video</button>
                     </div>
                 </div>
             </div>
