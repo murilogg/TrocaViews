@@ -8,7 +8,7 @@ use App\User;
 use App\Video;
 use Carbon\Carbon;
 
-class RankingController extends Controller
+class ConquestController extends Controller
 {
     public function index(){
         $id = Auth()->id();
@@ -22,6 +22,6 @@ class RankingController extends Controller
                             ->where('user_id', '=', $id)
                             ->orderBy('videos.id')->get();
 
-        return view('ranking', compact('user', 'data'), ['dados'=>$dados]);
+        return view('conquest', compact('user', 'data'), ['dados'=>$dados]);
     }
 }

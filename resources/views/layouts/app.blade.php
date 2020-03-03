@@ -156,7 +156,7 @@ body {
                                     </li>
                                     <br>
                                     <li class="nav-item">
-                                        <a href="{{ url('/tarefa') }}">
+                                        <a href="{{ url('/conquistas') }}">
                                         <i class="fa fa-th-list" aria-hidden="true"></i>
                                         Conquistas </a>
                                     </li>
