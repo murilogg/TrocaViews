@@ -101,25 +101,25 @@ body {
         </nav>
         
         <main class="py-4">
-            <div style="display: none;" id="userId">{{-- {{ $user->id }}--}}</div>  
+            <div style="display: none;" id="userId">{{ $user->id }}</div>  
             <div class="container">
                 <div class="row profile">
                     <div class="col-md-3">
                         <div class="profile-sidebar">
                             <!-- SIDEBAR USERPIC -->
                             <div class="profile-userpic">
-                                {{-- @if ($user)
+                                @if ($user)
                                     <img src="{{ $user->name }}" class="img-responsive" alt="">    
                                 @else
                                     <i class="fa fa-user" aria-hidden="true"></i>  
-                                @endif --}}
+                                @endif
                             </div>
 
                             <!-- END SIDEBAR USERPIC -->
                             <!-- SIDEBAR USER TITLE -->
                             <div class="profile-usertitle">
                                 <div class="profile-usertitle-name" style="">
-                                    {{-- {{ strtoupper(Auth::user()->name) }} --}}
+                                    {{ strtoupper(Auth::user()->name) }}
                                 </div>
                                 <div class="profile-usertitle-job">
                                     <i class="fa fa-youtube-play profile-usermenu" aria-hidden="true"></i> youtuber

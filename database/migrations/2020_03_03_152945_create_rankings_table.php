@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVistosTable extends Migration
+class CreateRankingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateVistosTable extends Migration
      */
     public function up()
     {
-        Schema::create('vistos', function (Blueprint $table) {
+        Schema::create('rankings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('vistoVisitante');
+            $table->integer('viewVisitante'); // qtd view do msm visitante
+            $table->string('msgVisitante');   // msg do visitante
+            $table->integer('ranking');       // avaliação 1 a 5 int
             $table->timestamps();
-            $table->bigInteger('visitante_id')->unsigned();
+            $table->bigInteger('visitante_id')->unsigned(); 
             $table->bigInteger('video_id')->unsigned();
             $table->foreign('visitante_id')->references('id')->on('users');
             $table->foreign('video_id')->references('id')->on('videos');
@@ -31,7 +33,6 @@ class CreateVistosTable extends Migration
      */
     public function down()
     {
-        Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('vistos');
+        Schema::dropIfExists('rankings');
     }
 }
