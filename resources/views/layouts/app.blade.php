@@ -149,19 +149,19 @@ body {
                                     </li>
                                     <br>
                                     <li class="nav-item">
-                                        <a href="#">
+                                        <a href="{{ url('/configuracao') }}">
                                         <i class="fa fa-cogs" aria-hidden="true"></i>		
                                         Configurações </a>
                                     </li>
                                     <br>
                                     <li class="nav-item">
-                                        <a href="#">
+                                        <a href="{{ url('/tarefas') }}">
                                         <i class="fa fa-th-list" aria-hidden="true"></i>
                                         Tarefas </a>
                                     </li>
                                     <br>
                                     <li class="nav-item">
-                                        <a href="#">
+                                        <a href="{{ url('/ajuda') }}">
                                         <i class="fa fa-question-circle" aria-hidden="true"></i>
                                         Ajuda </a>
                                     </li>

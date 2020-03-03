@@ -4733,8 +4733,11 @@ input[type=button].btn-block {
     color: #fff;
 }
 
+
+/* Border radius view setting */
+
 .card {
-    position: relative;
+    /* position: relative; */
     display: flex;
     flex-direction: column;
     min-width: 0;
@@ -4742,7 +4745,7 @@ input[type=button].btn-block {
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
-    border-radius: 0.25rem;
+    /* border-radius: 0.25rem; */
 }
 
 .card>hr {
@@ -7842,7 +7845,7 @@ button.bg-dark:focus {
 }
 
 .shadow {
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.30) !important;
 }
 
 .shadow-lg {

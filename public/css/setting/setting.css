@@ -1,0 +1,18 @@
+.borderRadius {
+    position: absolute;
+    left: 0%;
+    top: 15px;
+    border-radius: 50% 20% 50% 20%;
+}
+
+.borderRadiusCard {
+    border-radius: 50% 10% 20% 10%;
+}
+
+.borderCol {
+    padding: 40px 10px 10px 10px;
+}
+
+.paddingCard {
+    padding: 10px 20px 0px 20px;
+}
