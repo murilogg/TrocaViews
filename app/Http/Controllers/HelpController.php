@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Video;
-use Carbon\Carbon;
 
-class RankingController extends Controller
+class HelpController extends Controller
 {
     public function index(){
         $id = Auth()->id();
@@ -23,8 +22,6 @@ class RankingController extends Controller
                             ->where('user_id', '=', $id)
                             ->orderBy('videos.id')->get();
 
-        
-
-        return view('ranking', compact('user'), ['dados'=>$dados]);
+        return view('help', compact('user'), ['dados'=>$dados]);
     }
 }

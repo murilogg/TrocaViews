@@ -2,7 +2,15 @@
 
 .profile-sidebar {
     border-radius: 15px;
-    min-height: 500px;
+    min-height: 520px;
+}
+
+.buttonVerifica {
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
 }
 
 
@@ -124,7 +132,7 @@ ul {
 .profile-content {
     padding: 10px;
     background: #fff;
-    min-height: 500px;
+    min-height: 520px;
     border-radius: 10px;
 }
 

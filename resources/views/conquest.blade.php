@@ -7,8 +7,10 @@
     
 @endpush
 
-<div class="my-3 p-3 bg-white rounded shadow-sm">
-    <h5 class="border-bottom border-gray pb-2 mb-0">Conquistas</h5>
+<div class="title card-title">
+    <h5 class="border-bottom border-gray pb-2"><strong>Conquistas</strong></h5>
+</div>
+<div class="my-3 p-3 bg-white rounded conquestScroll">
 @for ($i = 0; $i < 5; $i++)
     <div class="media text-muted pt-3">
         <div class="padding">

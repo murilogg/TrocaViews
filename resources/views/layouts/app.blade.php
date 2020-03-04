@@ -106,7 +106,7 @@ body {
             <div class="container">
                 <div class="row profile">
                     <div class="col-md-3">
-                        <div class="profile-sidebar">
+                        <div class="profile-sidebar shadow-sm">
                             <!-- SIDEBAR USERPIC -->
                             <div class="profile-userpic">
                                 @if ($user)
@@ -130,8 +130,8 @@ body {
                             <!-- END SIDEBAR USER TITLE -->
                             <!-- SIDEBAR BUTTONS -->
                             <div class="profile-userbuttons">
-                                <button type="button" class="btn btn-success btn-sm" onclick="abriModalAdicionar()">Adicionar</button>
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#removerVideoModal">Funções</button>
+                                <button type="button" class="btn btn-success btn-sm shadow-sm" onclick="abriModalAdicionar()">Adicionar</button>
+                                <button type="button" class="btn btn-primary btn-sm shadow-sm" data-toggle="modal" data-target="#removerVideoModal">Funções</button>
                             </div>
                             <!-- END SIDEBAR BUTTONS -->
                             <!-- SIDEBAR MENU -->
@@ -172,7 +172,7 @@ body {
                         </div>
                     </div>
                     <div class="col-md-9">
-                        <div class="profile-content">
+                        <div class="profile-content shadow-sm">
                             @yield('content')   
                         </div>
                     </div>
@@ -184,7 +184,7 @@ body {
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Adicionar Video</h5>
+                            <h5 class="modal-title" id="exampleModalLabel"><strong>Adicionar Video</strong></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -208,7 +208,7 @@ body {
                                 <label for="verifica" class="col-lg-3 col-form-label text-md-right">{{ __('Verifica Video') }}</label>
                                 
                                 <div id="btn" class="col-md-8 one">
-                                    <button type="button" class="btn btn-primary btn-block" onclick="verifica()" id="verificaVideo">Verificar Video</button>
+                                    <button type="button" class="btn btn-primary btn-block buttonVerifica" onclick="verifica()" id="verificaVideo">VERIFICAR VIDEO</button>
                                 </div>
                             </div>
                         </div>
@@ -225,7 +225,7 @@ body {
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Desabilitar Video</h5>
+                            <h5 class="modal-title" id="exampleModalLabel"><strong>Desabilitar Video</strong></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

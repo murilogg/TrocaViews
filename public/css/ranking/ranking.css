@@ -1,18 +1,32 @@
+.paddingTop {
+    padding-top: 10px;
+}
+
 .btn-grey {
     background-color: #D8D8D8;
     color: #FFF;
 }
 
 .rating-block {
-    background-color: rgba(250, 250, 250, 0.397);
-    border: 3px solid #EFEFEF;
+    background-color: rgb(228, 235, 248);
+    border: 1px solid rgb(228, 235, 248);
     padding: 10px 15px 20px 15px;
-    border-radius: 10px;
+    border-radius: 5px;
     min-height: 100%;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
 }
 
 .rating {
     padding: 5px 0px 0px 0px;
+    background-color: rgb(228, 235, 248);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
 }
 
 .bold {
@@ -24,11 +38,15 @@
 }
 
 .review-block {
-    background-color: rgb(213, 247, 252);
-    border: 1px solid #EFEFEF;
+    background-color: rgb(228, 235, 248);
+    border: 1px solid #3490dc;
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 15px;
     margin-bottom: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
 }
 
 .review-block-name {
@@ -55,7 +73,7 @@
     font-size: 13px;
 }
 
-.msg {
+.msgScroll {
     width: 100%;
     height: 300px;
     overflow-y: scroll;
@@ -87,4 +105,8 @@
 .pull-right {
     margin-left: 7px;
     padding-top: 2px;
+}
+
+.action {
+    margin: 6px 0;
 }

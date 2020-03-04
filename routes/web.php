@@ -13,7 +13,7 @@ Route::get('/geral', 'HomeController@logado')->middleware('auth');
 Route::get('/ranking', 'RankingController@index')->middleware('auth');
 Route::get('/configuracao', 'SettingController@index')->middleware('auth');
 Route::get('/conquistas', 'ConquestController@index')->middleware('auth');
-Route::get('/ajuda', 'SettingController@index')->middleware('auth');
+Route::get('/ajuda', 'HelpController@index')->middleware('auth');
 
 
 Route::get('/api/ativaDesativa/{id}', 'HomeController@ativaDesativa')->name('ativaDesativa');
