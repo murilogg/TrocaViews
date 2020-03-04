@@ -2,10 +2,6 @@
 
 @section('content')
 
-{{-- @push('components')
-    
-@endpush --}}
-
 <div id="player"></div>
 {{-- <iframe id="player" type="text/html" width="100%" height="400px" src="" frameborder="0"></iframe> --}}
 {{-- <iframe id="player" type="text/html" width="640" height="360" src="http://www.youtube.com/embed/M7lc1UVf-VE?enablejsapi=1&origin=http://example.com" frameborder="0"></iframe> --}}
@@ -18,25 +14,6 @@
             <button type="button" class="btn btn-success btn-sm" style="text-align: right; font-size: 14px;" onclick="proximo()" data-toggle="tooltip" data-placement="right" title="VIDEO">
                 PRÓXIMO
             </button>
-        </div>
-    </div>
-</div>
-            
-{{-- Modal user logado --}}
-<div class="modal fade" id="userLogado">
-    <div class="modal-dialog modal-lg">
-        <div class="col-md-12">
-            <div class="card border-primary">
-                {{-- <div class="card-header title m-b-md">{{ strtoupper($user->name) }} - Você está logado!</div> --}}
-
-                <div class="card-body">
-                    @if (!session('status'))
-                        <div class="alert alert-primary title m-b-md" role="alert">
-                            Olá seja Bem-vindo ao Troca de Views
-                        </div>
-                    @endif       
-                </div>
-            </div>
         </div>
     </div>
 </div>
@@ -107,15 +84,15 @@
     @foreach ($dados as $item)
                         <tr>
                             <td style="display: none;">{{ $item->id }}</td>
-                            <td>{{ strtoupper($item->nomeVideo) }}</td>
-        @if($item->ativo == 1)
+                            <td>{{ strtoupper($item->nameVideo) }}</td>
+        @if($item->active == 1)
                             <td>ATIVADO</td>
         @else
                             <td>DESATIVADO</td>
         @endif
-                            <td>{{ $item->vistoVideo }}</td>
+                            <td>{{ $item->viewVideo }}</td>
                             <td>
-        @if($item->ativo == 0)
+        @if($item->active == 0)
                                 <button class="btn btn-danger btn-sm" onclick="ativaVideo({{ $item->id }}, {{ $dados }})" data-toggle="tooltip" data-placement="right" title="Ativar">
                                     <a style="color: white;" href="javascript:;"><i class="fa fa-power-off" aria-hidden="true"></i></a>
                                 </button>

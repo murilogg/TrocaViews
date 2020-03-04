@@ -46,64 +46,64 @@ function mensagens(position, title, text, icon, button, timer, footer) {
 function proximo() {
     var start = "https://www.youtube.com/embed/"
     var finish = "?autoplay=1&controls=0&enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A8000&widgetid=1"
-    var codigo = 0
-    var media = 0
+    var code = 0
+    var average = 0
     var cont = 0
-    var mediaMenor = 0
-    var contMenor = 0
-    var menor = 0
+    var averageSmaller = 0
+    var contSmaller = 0
+    var smaller = 0
 
     console.log(t)
     console.log(idVideoAtual)
 
     for (var i = 0; i < t.length; i++) {
         if (t[i].id == idVideoAtual) {
-            t[i].vistoVideo += 1
+            t[i].viewVideo += 1
         }
-        if (t[i].vistoVideo > 0) {
-            media += t[i].vistoVideo
+        if (t[i].viewVideo > 0) {
+            average += t[i].viewVideo
             cont++
         }
     }
-    media = media / cont
+    average = average / cont
 
     for (var i = 0; i < t.length; i++) {
-        if (t[i].vistoVideo > 0 && t[i].vistoVideo < media) {
-            mediaMenor += t[i].vistoVideo
-            contMenor++
+        if (t[i].viewVideo > 0 && t[i].viewVideo < average) {
+            averageSmaller += t[i].viewVideo
+            contSmaller++
         }
     }
-    mediaMenor = mediaMenor / contMenor
-    menor = media - mediaMenor
+    averageSmaller = averageSmaller / contSmaller
+    smaller = average - averageSmaller
 
     for (var x = 0; x < t.length; x++) {
-        if (t[x].vistoVideo == 0 && t[x].contadorHr == 0) {
-            codigo = t[x].videoId
-            start += codigo + finish
+        if (t[x].viewVideo == 0 && t[x].counterHr == 0) {
+            code = t[x].videoId
+            start += code + finish
             idVideoAtual = t[x].id
             document.getElementById("player").src = start
             break
-        } else if ([x].vistoVideo < menor) {
-            codigo = t[x].videoId
-            start += codigo + finish
+        } else if ([x].viewVideo < smaller) {
+            code = t[x].videoId
+            start += code + finish
             idVideoAtual = t[x].id
             document.getElementById("player").src = start
             break
-        } else if ([x].vistoVideo < mediaMenor) {
-            codigo = t[x].videoId
-            start += codigo + finish
+        } else if ([x].viewVideo < averageSmaller) {
+            code = t[x].videoId
+            start += code + finish
             idVideoAtual = t[x].id
             document.getElementById("player").src = start
             break
-        } else if (t[x].vistoVideo < media) {
-            codigo = t[x].videoId
-            start += codigo + finish
+        } else if (t[x].viewVideo < average) {
+            code = t[x].videoId
+            start += code + finish
             idVideoAtual = t[x].id
             document.getElementById("player").src = start
             break
         } else {
-            codigo = t[x].videoId
-            start += codigo + finish
+            code = t[x].videoId
+            start += code + finish
             idVideoAtual = t[x].id
             document.getElementById("player").src = start
         }
@@ -121,47 +121,47 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 var player, playing = false;
 
 function onYouTubeIframeAPIReady() {
-    var codigo = 0
-    var media = 0
+    var code = 0
+    var average = 0
     var cont = 0
-    var mediaMenor = 0
-    var contMenor = 0
-    var menor = 0
+    var averageSmaller = 0
+    var contSmaller = 0
+    var smaller = 0
     $.get('/api/obter', function(data) {
 
         t = JSON.parse(data);
         for (var i = 0; i < t.length; i++) {
-            if (t[i].vistoVideo > 0) {
-                media += t[i].vistoVideo
+            if (t[i].viewVideo > 0) {
+                average += t[i].viewVideo
                 cont++
             }
         }
-        media = media / cont
+        average = average / cont
 
         for (var i = 0; i < t.length; i++) {
-            if (t[i].vistoVideo > 0 && t[i].vistoVideo < media) {
-                mediaMenor += t[i].vistoVideo
-                contMenor++
+            if (t[i].viewVideo > 0 && t[i].viewVideo < average) {
+                averageSmaller += t[i].viewVideo
+                contSmaller++
             }
         }
-        mediaMenor = mediaMenor / contMenor
-        menor = media - mediaMenor
+        averageSmaller = averageSmaller / contSmaller
+        smaller = average - averageSmaller
 
         for (var x = 0; x < t.length; x++) {
-            if (t[x].vistoVideo == 0 && t[x].contadorHr == 0) {
-                codigo = t[x].videoId
+            if (t[x].viewVideo == 0 && t[x].counterHr == 0) {
+                code = t[x].videoId
                 idVideoAtual = t[x].id
                 break
-            } else if ([x].vistoVideo < mediaMenor) {
-                codigo = t[x].videoId
+            } else if ([x].viewVideo < averageSmaller) {
+                code = t[x].videoId
                 idVideoAtual = t[x].id
                 break
-            } else if (t[x].vistoVideo < media) {
-                codigo = t[x].videoId
+            } else if (t[x].viewVideo < average) {
+                code = t[x].videoId
                 idVideoAtual = t[x].id
                 break
             } else {
-                codigo = t[x].videoId
+                code = t[x].videoId
                 idVideoAtual = t[x].id
             }
         }
@@ -169,7 +169,7 @@ function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
             height: "400",
             width: "100%",
-            videoId: codigo,
+            videoId: code,
             playerVars: { 'autoplay': 1, 'controls': 0 },
             events: {
                 'onReady': onPlayerReady,

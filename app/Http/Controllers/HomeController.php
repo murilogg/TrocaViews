@@ -15,32 +15,29 @@ class HomeController extends Controller
     public function index()
     {
         $id = Auth()->id();
-        $data = Carbon::now();
         $user = User::find(Auth()->id());
-        $dados = Video::select('videos.id', 'videos.nomeVideo', 'videos.vistoVideo', 'videos.ativo', 
-                        'videos.contadorHr', 'videos.contadorDia', DB::raw('now() as dataServidor'))
+        $dados = Video::select('videos.id', 'videos.nameVideo', 'videos.viewVideo', 'videos.active', 
+                        'videos.counterHr', 'videos.counterDay', DB::raw('now() as dataServidor'))
                             ->join('users', 'users.id', '=', 'videos.user_id')
                             //->orWhere('ativo', '<>', 0)
                             ->where('user_id', '=', $id)
                             ->orderBy('videos.id')->get();
 
-        return view('home', compact('user', 'data'), ['dados'=>$dados]);
+        return view('home', compact('user'), ['dados'=>$dados]);
     }
 
     public function logado(){
         $id = Auth()->id();
-        $data = Carbon::now();
         $user = User::find(Auth()->id());
         $user->id = 0;
-        $dados = Video::select('videos.id', 'videos.nomeVideo', 'videos.vistoVideo', 'videos.ativo', 
-                        'videos.contadorHr', 'videos.contadorDia', DB::raw('now() as dataServidor'))
+        $dados = Video::select('videos.id', 'videos.nameVideo', 'videos.viewVideo', 'videos.active', 
+                        'videos.counterHr', 'videos.counterDay', DB::raw('now() as dataServidor'))
                             ->join('users', 'users.id', '=', 'videos.user_id')
                             //->orWhere('ativo', '<>', 0)
                             ->where('user_id', '=', $id)
                             ->orderBy('videos.id')->get();
 
-        
-        return view('home', compact('user', 'data'), ['dados'=>$dados]);
+        return view('home', compact('user'), ['dados'=>$dados]);
     }
 
     public function addVideo(Request $request){
