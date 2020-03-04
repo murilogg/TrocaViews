@@ -5435,7 +5435,7 @@ a.badge-dark.focus {
 
 .progress {
     display: flex;
-    height: 1rem;
+    /* height: 1rem; */
     overflow: hidden;
     font-size: 0.675rem;
     background-color: #e9ecef;

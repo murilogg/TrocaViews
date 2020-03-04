@@ -64,3 +64,27 @@
 .rank {
     text-align: center;
 }
+
+.space {
+    width: 35px;
+    line-height: 1;
+}
+
+.ratingStar {
+    height: 7px;
+    margin: 5px 0;
+}
+
+.progressBar {
+    width: 160px;
+}
+
+.progressBarHeight {
+    height: 10px;
+    margin: 6px 0;
+}
+
+.pull-right {
+    margin-left: 7px;
+    padding-top: 2px;
+}

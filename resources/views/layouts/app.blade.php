@@ -173,7 +173,107 @@ body {
                     </div>
                     <div class="col-md-9">
                         <div class="profile-content">
-                            @yield('content')                
+                            @yield('content')   
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            {{-- Modal adicionar video --}}
+            <div class="modal fade" id="adicionarVideoModal" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Adicionar Video</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label for="nomeVideo" class="col-lg-3 col-form-label text-md-right">{{ __('Nome do Video') }}</label>
+                                
+                                <div class="col-md-8">
+                                    <input id="nomeVideo" type="text" class="form-control" name="nomeVideo" minlength="4" maxlength="30" size="25" required placeholder="Informe nome do Video">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="canal" class="col-lg-3 col-form-label text-md-right">{{ __('Video youtube') }}</label>
+                                
+                                <div class="col-md-8">
+                                    <input id="canal" type="text" class="form-control" name="canal" required placeholder="Adicione seu Link aqui">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="verifica" class="col-lg-3 col-form-label text-md-right">{{ __('Verifica Video') }}</label>
+                                
+                                <div id="btn" class="col-md-8 one">
+                                    <button type="button" class="btn btn-primary btn-block" onclick="verifica()" id="verificaVideo">Verificar Video</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="fechaModalAdicionar()">Fechar</button>
+                            <button id="adiciona" type="button" class="btn btn-primary" onclick="salva()">Adicionar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Modal remover video --}}
+            <div class="modal fade" id="removerVideoModal" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Desabilitar Video</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+            @if(count($dados) > 0)
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>VIDEOS</th>
+                                        <th>STATUS</th>
+                                        <th>VISUALIZADO</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                @foreach ($dados as $item)
+                                    <tr>
+                                        <td style="display: none;">{{ $item->id }}</td>
+                                        <td>{{ strtoupper($item->nameVideo) }}</td>
+                    @if($item->active == 1)
+                                        <td>ATIVADO</td>
+                    @else
+                                        <td>DESATIVADO</td>
+                    @endif
+                                        <td>{{ $item->viewVideo }}</td>
+                                        <td>
+                    @if($item->active == 0)
+                                            <button class="btn btn-danger btn-sm" onclick="ativaVideo({{ $item->id }}, {{ $dados }})" data-toggle="tooltip" data-placement="right" title="Ativar">
+                                                <a style="color: white;" href="javascript:;"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+                                            </button>
+                    @else
+                                            <button class="btn btn-success btn-sm" onclick="desativaVideo({{ $item->id }}, {{ $dados }})" data-toggle="tooltip" data-placement="right" title="Desativar">
+                                                <a style="color: white;" href="javascript:;"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+                                            </button>
+                    @endif
+                                        </td>
+                                    </tr>
+                @endforeach
+                                </tbody>          
+                            </table>
+            @else
+                                        <div>{{ strtoupper(Auth::user()->name) }} - Você ainda não adicionou nenhum video<i class="fa fa-frown-o fa-2x" style="position:absolute; right: 10%; color: red;" aria-hidden="true"></i></div>  
+                                        <br><p>Se você adicionou algum video. Por favor atualize a Pàgina</p>               
+            @endif
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                         </div>
                     </div>
                 </div>

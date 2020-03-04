@@ -34,11 +34,13 @@
             <h4>Rating breakdown</h4>
     @for ($i = 5; $i > 0 ; $i--)
             <div class="pull-left">
-                <div class="pull-left space" style="width:35px; line-height:1;">
-                    <div style="height:7px; margin:5px 0;">{{ $i }} <i class="fa fa-star" aria-hidden="true"></i></div>
+                <div class="pull-left space">
+                    <div class="ratingStar">{{ $i }} 
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </div>
                 </div>
-                <div class="pull-left" style="width:160px;">
-                    <div class="progress" style="height:9px; margin:6px 0;">
+                <div class="pull-left progressBar">
+                    <div class="progress progressBarHeight">
                         {{-- <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5">
                         </div> --}}
         @if ($i == 5)
@@ -54,14 +56,14 @@
         @endif
                     </div>
                 </div>
-                <div class="pull-right" style="margin-left:7px;">{{ $i }}</div>
+                <div class="pull-right">{{ $i }}</div>
             </div>
     @endfor
         </div>	
         <div class="col-sm-3">
             <div class="rating-block">
                 <h5 class="rank">RANK</h5>
-                <h2 class="bold padding-bottom-6 rank">3.0</h2>
+                <h2 class="bold padding-bottom-6 rank">1213</h2>
                 <div class="rank">
                     <button type="button" class="btn btn-warning btn-grey btn-sm" aria-label="Align">
                         <i class="fa fa-star-o fa-2x rank" aria-hidden="true"></i>

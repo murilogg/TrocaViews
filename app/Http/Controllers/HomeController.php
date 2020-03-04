@@ -45,14 +45,14 @@ class HomeController extends Controller
         $id = Auth::id();
         $user = User::find(Auth()->id()); 
         $codVideo = $request->input('video');
-        $temVideoIgual = Video::where('videoId', $codVideo)->get();
+        $videoIgual = Video::where('videoId', $codVideo)->get();
         $firstVideo = DB::table('videos')->where('user_id', '=', $id)->get();
-        $videoAtivo = Video::select('videos.ativo')
+        $videoActive = Video::select('videos.active')
                             ->join('users', 'users.id', '=', 'videos.user_id')
                             ->orWhere('ativo', '<>', 0)
                             ->where('user_id', '=', $id)->get();
 
-        if(count($temVideoIgual) > 0){
+        if(count($videoIgual) > 0){
 
             return 0;
         }
@@ -63,7 +63,7 @@ class HomeController extends Controller
             $user->save();
         }
 
-        if(count($videoAtivo) >= 2){
+        if(count($videoActive) >= 2){
            
             return 2;
         }
@@ -71,10 +71,10 @@ class HomeController extends Controller
         $novo = new Video();
         $novo->nomeVideo = $request->input('nome');
         $novo->videoId = $codVideo;
-        $novo->vistoVideo = 0;
-        $novo->ativo = true;
-        $novo->contadorHr = Carbon::now()->subHour();
-        $novo->contadorDia = Carbon::now();
+        $novo->viewVideo = 0;
+        $novo->active = true;
+        $novo->counterHr = Carbon::now()->subHour();
+        $novo->counterDay = Carbon::now();
         $novo->created_at = Carbon::now();
         $novo->updated_at = Carbon::now();
         $novo->user_id = Auth::id();
@@ -86,8 +86,8 @@ class HomeController extends Controller
     public function obter(){
         $record = DB::table('videos')
                             ->select("*")
-                            ->where("ativo", "<>", 0)
-                            ->where('contadorHr', '<', DB::raw('NOW() - INTERVAL 1 HOUR'))
+                            ->where("active", "<>", 0)
+                            ->where('counterHr', '<', DB::raw('NOW() - INTERVAL 1 HOUR'))
                             ->get();
 
         return json_encode($record);
@@ -95,19 +95,19 @@ class HomeController extends Controller
 
     public function ativaDesativa($id){
         $video = Video::find($id);
-        $videoAtivo = Video::select('videos.ativo')
+        $videoActive = Video::select('videos.active')
                             ->join('users', 'users.id', '=', 'videos.user_id')
-                            ->orWhere('ativo', '<>', 0)
+                            ->orWhere('active', '<>', 0)
                             ->where('user_id', '=', $id)->get();
         
-        if(count($videoAtivo) >= 2){
+        if(count($videoActive) >= 2){
 
             return 0;
-        }else if($video->ativo == false){
-            $video->ativo = true;
+        }else if($video->active == false){
+            $video->active = true;
             $video->save();
         }else{
-            $video->ativo = false;
+            $video->active = false;
             $video->save();
         }
         
