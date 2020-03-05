@@ -38,16 +38,16 @@
 </div> --}}
 
 <div class="my-3 p-3 bg-white conquestScroll">
-    @for ($i = 0; $i < 5; $i++)
+    @for ($i = 0; $i < 10; $i++)
         <div class="col-md-12">
-            <div class="panel panel-primary">
+            <div class="panel panel-primary shadow-sm">
                 <div class="panel-heading clickable">
                     <div class="title">
-                        <strong class="d-block text-gray-dark">Regras</strong>
+                        <strong class="d-block text-gray-dark">Regras texto grande para teste em celular pequeno</strong>
                     </div>
-                        <span class="btn btn-primary btn-md paddingButton pull-right">
-                            <i class="fa fa-arrow-right fa-lg" aria-hidden="true"></i>
-                        </span>
+                    <span class="btn btn-primary btn-md paddingButton pull-right shadow-sm">
+                        <i class="fa fa-arrow-right fa-lg" aria-hidden="true"></i>
+                    </span>
                 </div>
                 <div class="panel-body">
                     Panel content <a href="http://www.jquery2dotnet.com/2014/01/static-social-button-with-animation.html">Static Social Button With Animation</a>

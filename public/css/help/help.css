@@ -8,7 +8,7 @@
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
-    padding: 0px 30px 15px 0px
+    padding: 0px 30px 15px 0px;
 }
 
 .conquestScroll {
@@ -25,24 +25,17 @@
     background-color: rgb(228, 235, 248);
     border: 1px solid #3490dc;
     border-radius: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .clickable {
     cursor: pointer;
 }
 
-.clickable .glyphicon {
-    background: rgba(0, 0, 0, 0.15);
-    display: inline-block;
-    padding: 6px 12px;
-    border-radius: 4px
-}
-
 .panel-heading span {
-    margin-top: -23px;
+    margin-top: -41px;
     font-size: 15px;
-    margin-right: -9px;
+    margin-right: 10px;
 }
 
 a.clickable {
