@@ -46,5 +46,12 @@
         </div>
 @endfor
 </div>
+<div class="form-group">
+    <label>Adicione uma Foto</label>
+    <input type="file" name="photo" class="form-control">
+</div>
+@csrf
+<button class="btn btn-primary btn-sm"><a href="/foto"></a></button>
+<img src="{{ $user->name }}" class="img-responsive" alt=""> 
 
 @endsection

@@ -19,8 +19,9 @@ class CreateUsersTable extends Migration
             $table->integer('credit')->nullable();    // total de tempo c/desconto
             $table->integer('totCredit')->nullable(); // total de tempo acumulado
             $table->integer('totView')->nullable();   // total de visto
-            $table->integer('limit')->nullable();     // limit 2 por video
+            $table->integer('limit')->default(2);     // limit 2 por video
             $table->integer('concluded')->nullable(); // missoes concluidas
+            $table->binary('image')->nullable();      
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

@@ -2,15 +2,15 @@
 
 
 @section('content')
-    <link href="{{ asset('css/conquest/conquest.css') }}" rel="stylesheet">
-@push('components') 
     
+@push('components') 
+    <link href="{{ asset('css/conquest/conquest.css') }}" rel="stylesheet">
 @endpush
 
 <div class="title card-title">
     <h5 class="border-bottom border-gray pb-2"><strong>Conquistas</strong></h5>
 </div>
-<div class="my-3 p-3 bg-white rounded conquestScroll">
+<div class="my-3 p-3 bg-white rounded conquestScroll style-1">
 @for ($i = 0; $i < 5; $i++)
     <div class="media text-muted pt-3">
         <div class="padding">

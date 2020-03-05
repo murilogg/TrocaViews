@@ -113,4 +113,8 @@ class HomeController extends Controller
         
         return redirect('/troca');
     }
+
+    public function store(Request $request){
+        dd($request->file('photo'));
+    }
 }

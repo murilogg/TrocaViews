@@ -4,14 +4,14 @@
 @section('content')
 
 @push('components') 
-    <link href="{{ asset('css/ranking/ranking.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/almost/almost.css') }}" rel="stylesheet">
 @endpush
 
 <div class="container">
     <div class="row paddingTop">
         <div class="col-sm-5">
             <div class="rating-block shadow-sm">
-                <h4>Média Geral</h4>
+                <h4>Avaliação média {{ $user->name }}</h4>
                 <h2 class="bold padding-bottom-6">3.0 <small>/ 5</small></h2>
                 <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
                     <i class="fa fa-star" aria-hidden="true"></i>
@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="rating col-sm-4 shadow-sm">
-            <h4>Detalhamento Geral</h4>
+            <h4>Avaliação detalhada</h4>
     @for ($i = 5; $i > 0 ; $i--)
             <div class="pull-left">
                 <div class="pull-left space">

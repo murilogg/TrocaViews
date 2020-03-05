@@ -109,10 +109,8 @@ body {
                         <div class="profile-sidebar shadow-sm">
                             <!-- SIDEBAR USERPIC -->
                             <div class="profile-userpic">
-                                @if ($user)
-                                    <img src="{{ $user->name }}" class="img-responsive" alt="">    
-                                @else
-                                    <i class="fa fa-user" aria-hidden="true"></i>  
+                                @if ($user->image)
+                                    <img src="{{ $user->image }}" class="img-responsive" alt=""> 
                                 @endif
                             </div>
 
@@ -149,6 +147,12 @@ body {
                                         Ranking</a>
                                     </li>
                                     <br>
+                                    <li class="nav-item" >
+                                        <a href="{{ url('/quaseLa') }}">
+                                        <i class="fa fa-rocket" aria-hidden="true"></i>
+                                        Quase lá</a>
+                                    </li>
+                                    <br>
                                     <li class="nav-item">
                                         <a href="{{ url('/configuracao') }}">
                                         <i class="fa fa-cogs" aria-hidden="true"></i>		
@@ -173,7 +177,7 @@ body {
                     </div>
                     <div class="col-md-9">
                         <div class="profile-content shadow-sm">
-                            @yield('content')   
+                            @yield('content') 
                         </div>
                     </div>
                 </div>
@@ -268,8 +272,10 @@ body {
                                 </tbody>          
                             </table>
             @else
-                                        <div>{{ strtoupper(Auth::user()->name) }} - Você ainda não adicionou nenhum video<i class="fa fa-frown-o fa-2x" style="position:absolute; right: 10%; color: red;" aria-hidden="true"></i></div>  
-                                        <br><p>Se você adicionou algum video. Por favor atualize a Pàgina</p>               
+                            <div>{{ strtoupper(Auth::user()->name) }} - Você ainda não adicionou nenhum video
+                                <i class="fa fa-frown-o fa-2x" style="position:absolute; right: 10%; color: red;" aria-hidden="true"></i>
+                            </div>  
+                            <br><p>Se você adicionou algum video. Por favor atualize a Pàgina</p>               
             @endif
                         </div>
                         <div class="modal-footer">
