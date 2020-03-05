@@ -163,3 +163,16 @@ div.one {
     display: block;
     width: 100%;
 }
+
+
+/* button home */
+
+.buttonHome {
+    text-align: right;
+    font-size: 14px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}

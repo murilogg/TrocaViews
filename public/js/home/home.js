@@ -8,41 +8,6 @@ window.onload = function() {
 let t
 var idVideoAtual
 
-function sidebarActive() {
-    var div = document.getElementById("ul")
-    var lb = div.getElementsByClassName("nav-item")
-    for (var i = 0; i < lb.length; i++) {
-        lb[i].addEventListener("click", function() {
-            var current = document.getElementsByClassName("active")
-            current[0].className = current[0].className.replace(" active", "")
-            this.className += " active"
-        })
-    }
-}
-
-// Modal Bem-vindo
-function userLogado() {
-    var logado = $('#userId').text();
-    if (logado != 0) {
-        mensagens("center", "Seja Bem-Vindo!", "Você está logado!", "success", false, 2500, false)
-            // setTimeout(function() {
-            //     $('#userLogado').modal('hide');
-            // }, 3000); // 3000 = 3 segundos
-    }
-}
-
-function mensagens(position, title, text, icon, button, timer, footer) {
-    Swal.fire({
-        position: position,
-        title: title,
-        text: text,
-        icon: icon,
-        showConfirmButton: button,
-        timer: timer,
-        footer: footer
-    })
-}
-
 function proximo() {
     var start = "https://www.youtube.com/embed/"
     var finish = "?autoplay=1&controls=0&enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A8000&widgetid=1"

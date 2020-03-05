@@ -62,13 +62,10 @@
         </div>	
         <div class="col-sm-3">
             <div class="rating-block shadow-sm">
-                <h5 class="rank">RANK</h5>
-                <h2 class="bold padding-bottom-6 rank">1213</h2>
-                <div class="rank">
-                    <button type="button" class="btn btn-warning btn-grey btn-sm" aria-label="Align">
-                        <i class="fa fa-star-o fa-2x rank" aria-hidden="true"></i>
-                    </button>
-                </div>
+                <h5 class="rank">TOP 3#</h5>
+                <h5 class="padding-bottom-6 rankName">fulano #1</h5>
+                <h5 class="padding-bottom-6 rankName">fulano #2</h5>
+                <h5 class="padding-bottom-6 rankName">fulano #3</h5>
             </div>
         </div>		
     </div>		
@@ -79,11 +76,6 @@
     @for($i = 0; $i < 5; $i++)
             <div class="review-block">
                 <div class="row">
-                    <div class="col-sm-2">
-                        <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
-                        <div class="review-block-date">January 29, 2016<br/>1 day ago</div>
-                        <div class="review-block-name"><a href="#">nktailor</a></div>
-                    </div>
                     <div class="col-sm-10">
                         <div class="review-block-rate">
                             <i class="fa fa-star" aria-hidden="true"></i>
@@ -91,22 +83,10 @@
                             <i class="fa fa-star" aria-hidden="true"></i>
                         </div>
                         <div class="review-block-title">this was nice in buy</div>
-                        <div class="review-block-description">this was nice in buy. this was nice in buy. this was nice in buy. this was nice in buy this was nice in buy this was nice in buy this was nice in buy this was nice in buy</div>
-                        <div class="action">
-                            <button type="button" class="btn btn-primary btn-sm shadow-sm" data-toggle="tooltip" data-placement="top" title="Responder">
-                                <i class="fa fa-comments-o fa-lg" aria-hidden="true"></i>
-                            </button>
-                            <button type="button" class="btn btn-success btn-sm shadow-sm" data-toggle="tooltip" data-placement="top" title="Curtir">
-                                <i class="fa fa-thumbs-o-up fa-lg" aria-hidden="true"></i>
-                            </button>
-                            <button type="button" class="btn btn-danger btn-sm shadow-sm" data-toggle="tooltip" data-placement="top" title="Apagar">
-                                <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
-                            </button>
-                        </div>
+                        <div class="review-block-description">this was nice in buy. this was nice in buy.</div>
                     </div>
                 </div>
             </div>
-            <hr>
     @endfor
     </div>
 </div>

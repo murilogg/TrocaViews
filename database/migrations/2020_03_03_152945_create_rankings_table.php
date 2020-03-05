@@ -15,9 +15,10 @@ class CreateRankingsTable extends Migration
     {
         Schema::create('rankings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('viewVisitor'); // qtd view do msm visitante
+            $table->integer('qtdViewVisitor'); // qtd view do msm visitante
             $table->string('msgVisitor');   // msg do visitante
-            $table->integer('ranking');       // avaliação 1 a 5 int
+            $table->integer('ranking');     // avaliação 1 a 5 int
+            $table->dateTime('counter');    // dia da msg
             $table->timestamps();
             $table->bigInteger('visitor_id')->unsigned(); 
             $table->bigInteger('video_id')->unsigned();

@@ -10,7 +10,7 @@
 .rating-block {
     background-color: rgb(228, 235, 248);
     border: 1px solid rgb(228, 235, 248);
-    padding: 10px 15px 20px 15px;
+    padding: 10px 15px 10px 15px;
     border-radius: 5px;
     min-height: 100%;
     -webkit-border-radius: 5px;
@@ -40,9 +40,10 @@
 .review-block {
     background-color: rgb(228, 235, 248);
     border: 1px solid #3490dc;
-    padding: 15px;
+    padding: 10px;
+    padding-bottom: 5px;
+    margin: 5px 0;
     border-radius: 15px;
-    margin-bottom: 15px;
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
     -ms-border-radius: 15px;
@@ -60,20 +61,25 @@
 
 .review-block-rate {
     font-size: 13px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 .review-block-title {
     font-size: 15px;
     font-weight: 700;
-    margin-bottom: 10px;
 }
 
 .review-block-description {
     font-size: 13px;
 }
 
+.rankName {
+    text-align: center;
+    font-size: 15px;
+}
+
 .rank {
+    padding-bottom: 8px;
     text-align: center;
 }
 

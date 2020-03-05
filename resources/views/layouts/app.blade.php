@@ -12,6 +12,10 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Scripts geral-->
+    <script type="text/javascript" src="{{ asset('js/home/mensagem.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/home/sidebar.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/home/userLogado.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/home/comment.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/home/verificaVideo.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/home/funcaoVideo.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/home/home.js') }}"></script>

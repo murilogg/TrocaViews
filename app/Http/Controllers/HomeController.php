@@ -49,7 +49,7 @@ class HomeController extends Controller
         $firstVideo = DB::table('videos')->where('user_id', '=', $id)->get();
         $videoActive = Video::select('videos.active')
                             ->join('users', 'users.id', '=', 'videos.user_id')
-                            ->orWhere('ativo', '<>', 0)
+                            ->orWhere('active', '<>', 0)
                             ->where('user_id', '=', $id)->get();
 
         if(count($videoIgual) > 0){
@@ -69,7 +69,7 @@ class HomeController extends Controller
         }
 
         $novo = new Video();
-        $novo->nomeVideo = $request->input('nome');
+        $novo->nameVideo = $request->input('nome');
         $novo->videoId = $codVideo;
         $novo->viewVideo = 0;
         $novo->active = true;
@@ -84,9 +84,11 @@ class HomeController extends Controller
     }
 
     public function obter(){
+        $id = Auth::id();
         $record = DB::table('videos')
-                            ->select("*")
-                            ->where("active", "<>", 0)
+                            ->select('*')
+                            ->where('active', '<>', 0)
+                            ->where('videos.user_id', '<>', $id)
                             ->where('counterHr', '<', DB::raw('NOW() - INTERVAL 1 HOUR'))
                             ->get();
 
