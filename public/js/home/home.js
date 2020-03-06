@@ -7,6 +7,7 @@ window.onload = function() {
 
 let t
 var idVideoAtual
+var nomeUserAtual
 
 function proximo() {
     var start = "https://www.youtube.com/embed/"
@@ -46,31 +47,46 @@ function proximo() {
             code = t[x].videoId
             start += code + finish
             idVideoAtual = t[x].id
+            nomeUserAtual = t[x].name.split(' ')[0];
+            var text = "Ajude " + nomeUserAtual + " a evoluir, comente aonde ele pode melhorar"
             document.getElementById("player").src = start
+            document.getElementsByTagName("placeholder") = text
             break
         } else if ([x].viewVideo < smaller) {
             code = t[x].videoId
             start += code + finish
             idVideoAtual = t[x].id
+            nomeUserAtual = t[x].name.split(' ')[0];
+            var text = "Ajude " + nomeUserAtual + " a evoluir, comente aonde ele pode melhorar"
             document.getElementById("player").src = start
+            document.getElementsByTagName("placeholder") = text
             break
         } else if ([x].viewVideo < averageSmaller) {
             code = t[x].videoId
             start += code + finish
             idVideoAtual = t[x].id
+            nomeUserAtual = t[x].name.split(' ')[0];
+            var text = "Ajude " + nomeUserAtual + " a evoluir, comente aonde ele pode melhorar"
             document.getElementById("player").src = start
+            document.getElementsByTagName("placeholder") = text
             break
         } else if (t[x].viewVideo < average) {
             code = t[x].videoId
             start += code + finish
             idVideoAtual = t[x].id
+            nomeUserAtual = t[x].name.split(' ')[0];
+            var text = "Ajude " + nomeUserAtual + " a evoluir, comente aonde ele pode melhorar"
             document.getElementById("player").src = start
+            document.getElementsByTagName("placeholder") = text
             break
         } else {
             code = t[x].videoId
             start += code + finish
             idVideoAtual = t[x].id
+            nomeUserAtual = t[x].name.split(' ')[0];
+            var text = "Ajude " + nomeUserAtual + " a evoluir, comente aonde ele pode melhorar"
             document.getElementById("player").src = start
+            document.getElementsByTagName("placeholder") = text
         }
     }
 

@@ -87,6 +87,7 @@ class HomeController extends Controller
         $id = Auth::id();
         $record = DB::table('videos')
                             ->select('*')
+                            ->join('users', 'users.id', '=', 'videos.user_id')
                             ->where('active', '<>', 0)
                             ->where('videos.user_id', '<>', $id)
                             ->where('counterHr', '<', DB::raw('NOW() - INTERVAL 1 HOUR'))
